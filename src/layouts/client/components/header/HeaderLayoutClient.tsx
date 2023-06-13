@@ -70,46 +70,45 @@ export default function HeaderLayoutClient() {
                 </div>
                 {/* Mobile and small-screen devices (toggle Menu) */}
                 <div id="MobileNavigation" className={`${show ? 'block' : 'hidden'} sm:hidden mt-4 mx-auto`}>
-                    <div className="flex flex-row items-center justify-center space-x-6">
-                        <Menu className="sm:hidden md:block">
+                    <div className="block sm:hidden md:block">
+                        <Menu>
                             <Menu.Item key="home">
-                                <Link to="/">Home</Link>
+                                <a href="/">Home</a>
                             </Menu.Item>
                             <Menu.Item key="products">
-                                <Link to="/products">product</Link>
+                                <a href="/products">product</a>
                             </Menu.Item>
                             <Menu.Item key="products/sales">
-                                <Link to="/products/sales">new sale</Link>
+                                <a href="/products/sales">new sale</a>
                             </Menu.Item>
                             <Menu.Item key="abouts">
-                                <Link to="/abouts">about</Link>
+                                <a href="/abouts">about</a>
                             </Menu.Item>
                             <Menu.Item key="contacts">
-                                <Link to="/contacts">contact</Link>
+                                <a href="/contacts">contact</a>
                             </Menu.Item>
                         </Menu>
                     </div>
-                    <div className="ml-[180px]">
-                        <div>
-                            <Link to="/cart">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width={24}
-                                    height={24}
-                                    fill="currentColor"
-                                    className="ml-[32px]"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                </svg>
-                            </Link>
-                        </div>
-                        <div className="py-4">
-                            <SignupPage />
-                        </div>
-                        <div>
-                            <SigninPage />
-                        </div>
+                    <div className="py-4">
+                        <SignupPage />
+                    </div>
+                    <div className="pb-4">
+                        <SigninPage />
+                    </div>
+                    <div className="pt-4 pb-2">
+                        <Link to="/cart" className="text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center">
+                            <div className="relative flex-shrink-0">
+                                {cartItems.length === 0 ?
+                                    <Badge text={0}>
+                                        <ShoppingCartOutlined style={{ fontSize: '30px' }} className="text-gray-600" />
+                                    </Badge>
+                                    :
+                                    <Badge count={cartItems.length}>
+                                        <ShoppingCartOutlined className="h-5 w-5 ml-[20px]" style={{ fontSize: '30px' }} />
+                                    </Badge>
+                                }
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </nav>

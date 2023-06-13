@@ -1,38 +1,6 @@
-import IContact from '../../../types/contact';
-import { Button, Form, FormItemProps, Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { message } from "antd"
-import { createContext, useContext } from 'react';
-import { CreateContact } from '../../../api/contact';
-const MyFormItemContext = createContext<(string | number)[]>([]);
-function toArr(str: string | number | (string | number)[]): (string | number)[] {
-    return Array.isArray(str) ? str : [str];
-}
-const MyFormItem = ({ name, ...props }: FormItemProps) => {
-    const prefixPath = useContext(MyFormItemContext);
-    const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-    return <Form.Item name={concatName} {...props} />;
-};
-const ContactPage = () => {
-    const Navigate = useNavigate()
-    const onFinish = async (value: IContact) => {
-        const key = 'loading'
-        if (value) {
-            try {
-                const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
-                if (loading) {
-                    const response = await CreateContact(value);
-                    if (response && response.data) {
-                        message.success(response.data.message, 3);
-                        Navigate('/')
-                    }
-                }
+import FormCreateContact from "./components/CreateContact"
 
-            } catch (error: any) {
-                message.error(error.response.data.message, 5);
-            }
-        }
-    }
+const ContactPage = () => {
     return (
         <section className="bg-gray-100">
             <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -177,77 +145,7 @@ const ContactPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-8 py-8 bg-white border rounded-md shadow-md dark:border-gray-800 dark:bg-gray-800">
-                            <Form className="mt-[24px] w-[850px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
-                                <MyFormItem
-                                    name="name"
-                                    label="name"
-                                    rules={[
-                                        {
-                                            message: 'vui lòng nhập name!',
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input className='h-10' placeholder="nhập name" />
-                                </MyFormItem>
-                                <MyFormItem
-                                    name="email"
-                                    label="Email"
-                                    rules={[
-                                        {
-                                            message: 'vui lòng nhập email!',
-                                            required: true,
-                                            type: 'email'
-                                        },
-                                    ]}
-                                >
-                                    <Input className='h-10' placeholder="nhập email" />
-                                </MyFormItem>
-                                <MyFormItem
-                                    name="phone"
-                                    label="phone"
-                                    rules={[
-                                        {
-                                            message: 'vui lòng nhập phone!',
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input className='h-10' placeholder="nhập phone" />
-                                </MyFormItem>
-                                <MyFormItem
-                                    name="address"
-                                    label="address"
-                                    rules={[
-                                        {
-                                            message: 'vui lòng nhập address!',
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input className='h-10' placeholder="nhập address" />
-                                </MyFormItem>
-                                <MyFormItem
-                                    name="support"
-                                    label="support"
-                                    rules={[
-                                        {
-                                            message: 'vui lòng nhập support!',
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input.TextArea rows={8} />
-                                </MyFormItem>
-                                <Button
-                                    htmlType="submit"
-                                    className="w-[200px] rounded-lg h-[52px] text-center py-3 rounded bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
-                                >
-                                    Gửi Ngay
-                                </Button>
-                            </Form>
-                        </div>
+                        <FormCreateContact/>
                     </div>
                 </section>
             </div>
