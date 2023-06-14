@@ -1,4 +1,4 @@
-import { Button, Form, Input, Menu, Modal } from "antd";
+import { Menu } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from 'antd';
@@ -25,9 +25,6 @@ export default function HeaderLayoutClient() {
                             </li>
                             <li className="pb-3">
                                 <Link to='/products/sales' className="text-sm text-[red] font-bold">news sale</Link>
-                            </li>
-                            <li className="pb-3">
-                                <Link to='/abouts' className="text-sm text-gray-700 font-bold hover:text-blue-400 dark:text-gray-400">About us</Link>
                             </li>
                             <li className="pb-3">
                                 <Link to='/contacts' className="text-sm text-gray-700 font-bold hover:text-blue-400 dark:text-gray-400">contacts</Link>
@@ -73,19 +70,16 @@ export default function HeaderLayoutClient() {
                     <div className="block sm:hidden md:block">
                         <Menu>
                             <Menu.Item key="home">
-                                <a href="/">Home</a>
+                                <Link to="/">Home</Link>
                             </Menu.Item>
                             <Menu.Item key="products">
-                                <a href="/products">product</a>
+                                <Link to="/products">product</Link>
                             </Menu.Item>
                             <Menu.Item key="products/sales">
-                                <a href="/products/sales">new sale</a>
-                            </Menu.Item>
-                            <Menu.Item key="abouts">
-                                <a href="/abouts">about</a>
+                                <Link to="/products/sales">new sale</Link>
                             </Menu.Item>
                             <Menu.Item key="contacts">
-                                <a href="/contacts">contact</a>
+                                <Link to="/contacts">contact</Link>
                             </Menu.Item>
                         </Menu>
                     </div>

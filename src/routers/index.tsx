@@ -5,7 +5,6 @@ import Homepage from "../pages/client/HomePage";
 import ProductPage from "../pages/client/ProductsPage";
 import ProductDetailPage from "../pages/client/ProductDetailPage";
 import NotFoundPage from "../pages/client/404";
-import AboutPage from "../pages/client/AboutPage";
 import SignupPage from "../pages/client/SignupPage";
 import SigninPage from "../pages/client/SigninPage";
 import ContactPage from "../pages/client/ContactPage";
@@ -15,22 +14,18 @@ import OrderPage from "../pages/client/Bill";
 
 import LayoutAdmin from "../layouts/admin";
 import ManagementProduct from "../pages/admin/products/ManageProduct";
-import ManagementProductCreate from "../pages/admin/products/components/ManageProductCreate";
 import ManagementProductUpdate from "../pages/admin/products/components/ManageProductUpdate";
 import ManageCategory from "../pages/admin/categories/ManageCategory";
-import ManageCategoryCreate from "../pages/admin/categories/components/ManageCategoryCreate";
 import ManageCategoryUpdate from "../pages/admin/categories/components/ManageCategoryUpdate";
 import ManageComment from "../pages/admin/comments/ManageComment";
 import ManageContact from "../pages/admin/contacts/ManageContact";
 import ManageUser from "../pages/admin/user/ManageUser";
 import Management from "../pages/admin/dashboard/Management";
 import ManageHashtag from "../pages/admin/hashtags/ManageHashtag";
-import ManageHashtagCreate from "../pages/admin/hashtags/components/ManageHashtagCreate";
 import ManageHashtagUpdate from "../pages/admin/hashtags/components/ManageHashtagUpdate";
 import ManageBill from "../pages/admin/bills/ManageBill";
 import ManageBillUpdate from "../pages/admin/bills/components/ManageBillUpdate";
 import ManageAbout from "../pages/admin/abouts/ManageAbout";
-import ManageAboutCreate from "../pages/admin/abouts/components/ManageAboutCreate";
 import ManageAboutUpdate from "../pages/admin/abouts/components/ManageAboutUpdate";
 
 import { ICategory } from "../types/category";
@@ -63,7 +58,7 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='' element={<LayoutClient products={products} />}>
+                <Route path='' element={<LayoutClient />}>
                     <Route index element={<Homepage />} />
                     <Route path='products'>
                         <Route index element={<ProductPage categories={categories} />} />
@@ -79,28 +74,23 @@ const Router = () => {
                         <Route index element={<OrderPage />} />
                     </Route>
                     <Route path='contacts' element={<ContactPage />} />
-                    <Route path='abouts' element={<AboutPage />} />
                 </Route>
                 <Route path='admin' element={<LayoutAdmin />}>
                     <Route index element={<Management />} />
                     <Route path='products'>
                         <Route index element={<ManagementProduct products={products} categories={categories} hashtags={hashtags} />} />
-                        {/* <Route path='add' element={<ManagementProductCreate />} /> */}
                         <Route path=':id/update' element={<ManagementProductUpdate products={products} hashtags={hashtags} categories={categories} />} />
                     </Route>
                     <Route path='categories'>
                         <Route index element={<ManageCategory categories={categories} />} />
-                        <Route path='add' element={<ManageCategoryCreate />} />
                         <Route path=':id/update' element={<ManageCategoryUpdate categories={categories} />} />
                     </Route>
                     <Route path='hashtags'>
                         <Route index element={<ManageHashtag />} />
-                        <Route path='add' element={<ManageHashtagCreate />} />
                         <Route path=':id/update' element={<ManageHashtagUpdate hashtags={hashtags} />} />
                     </Route>
                     <Route path='abouts'>
                         <Route index element={<ManageAbout />} />
-                        <Route path='add' element={<ManageAboutCreate />} />
                         <Route path=':id/update' element={<ManageAboutUpdate />} />
                     </Route>
                     <Route path='bill'>

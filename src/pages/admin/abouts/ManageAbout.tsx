@@ -1,4 +1,4 @@
-import { Table, Empty, message } from 'antd';
+import { Table, Empty, message, Image } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { GetAllAbout, RemoveAbout } from '../../../api/about';
@@ -54,6 +54,12 @@ const ManageAbout = () => {
       title: 'address',
       dataIndex: 'address',
       key: 'address'
+    },
+    {
+      title: 'image',
+      key: 'image',
+      render: (item: IAbout) =>
+        <Image style={{ width: 50, height: 50 }} src={item.image} alt="" />
     },
     {
       title: 'mô tả',

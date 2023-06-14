@@ -78,15 +78,12 @@ export const items: MenuProps['items'] = [
   ]),
   getItem('sản phẩm', 'sản phẩm', <MobileOutlined />, [
     getItem(<Link to="/admin/products">Danh sách sản phẩm</Link>, '/admin/products'),
-    getItem(<Link to="/admin/products/add">Thêm mới sản phẩm</Link>, '/admin/products/add'),
   ]),
   getItem('Danh mục', 'Danh mục', <LaptopOutlined />, [
     getItem(<Link to="/admin/categories">Danh sách danh mục</Link>, '/admin/categories'),
-    getItem(<Link to="/admin/categories/add">Thêm mới Danh mục</Link>, '/admin/categories/add'),
   ]),
   getItem('hash tags', 'hash tags', <TagsOutlined />, [
     getItem(<Link to="/admin/hashtags">Danh sách hash tag</Link>, '/admin/hashtags'),
-    getItem(<Link to="/admin/hashtags/add">Thêm mới hash tag</Link>, '/admin/hashtags/add'),
   ]),
   getItem('bình luận', 'bình luận', <MessageOutlined />, [
     getItem(<Link to="/admin/comments">Danh sách bình luận</Link>, '/admin/comments'),

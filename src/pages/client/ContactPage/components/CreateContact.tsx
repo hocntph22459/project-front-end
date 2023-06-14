@@ -37,6 +37,29 @@ const FormCreateContact = (props: Props) => {
     }
     return (
         <div className="px-8 py-8 bg-white border rounded-md shadow-md dark:border-gray-800 dark:bg-gray-800">
+            <div className="max-w-xl mx-auto">
+                <div className="text-center ">
+                    <div className="relative flex flex-col items-center">
+                        <div className="absolute hidden md:block -top-14 left-0 text-[120px] text-gray-400 font-bold opacity-10">
+                            Contact
+                        </div>
+                        <h1 className="text-5xl font-bold dark:text-white">
+                            {" "}
+                            Our <span className="text-blue-500"> Contact</span>{" "}
+                        </h1>
+                        <div className="flex w-24 mt-1 mb-10 overflow-hidden rounded">
+                            <div className="flex-1 h-2 bg-blue-200"></div>
+                            <div className="flex-1 h-2 bg-blue-400"></div>
+                            <div className="flex-1 h-2 bg-blue-600"></div>
+                        </div>
+                    </div>
+                    <p className="mb-16 text-base text-center text-gray-500">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus
+                        magni eius eaque? Pariatur numquam, odio quod nobis ipsum ex
+                        cupiditate?
+                    </p>
+                </div>
+            </div>
             <div className="px-8 py-8 bg-white border rounded-md shadow-md dark:border-gray-800 dark:bg-gray-800">
                 <Form className="mt-4 max-w-lg mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
                     <MyFormItem
