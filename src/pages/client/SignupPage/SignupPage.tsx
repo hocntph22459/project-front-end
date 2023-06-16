@@ -1,4 +1,4 @@
-import  { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useRef, useState } from 'react';
 import { Button, Form, FormItemProps, Input, Modal } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from "antd"
@@ -67,9 +67,9 @@ const SignupPage = () => {
             </Button>
             <Modal open={isModalOpen} footer={null} onOk={handleOkSignup} onCancel={handleCancelSignup}>
                 <Form className="mt-[30px] w-[400px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
-                    <h1 className="text-center mt-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Sign up
-                    </h1>
+                    <p tabIndex={0} role="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800 mb-8">
+                        signup to your account
+                    </p>
                     <MyFormItem className='text-black font-bold'
                         rules={[
                             {
@@ -139,16 +139,10 @@ const SignupPage = () => {
                     </MyFormItem>
                     <Button
                         htmlType="submit"
-                        className="w-full h-[52px] text-center py-3 rounded bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
+                        className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
                     >
-                        Đăng ký
+                        Sign up
                     </Button>
-                    <p className="text-sm  text-black font-bold dark:text-gray-400">
-                        bạn đã có tài khoản?{" "}
-                        <Link to="/signin" className="text-primary">
-                            đăng nhập
-                        </Link>
-                    </p>
                 </Form>
             </Modal>
         </>

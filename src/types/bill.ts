@@ -7,15 +7,16 @@ interface IBill {
   email: string;
   phone: number;
   address: string,
-  items: product[];
+  items: Itembill[];
   total: number;
   status: String;
+  orderCode:number;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null;
 }
 
-interface product {
+export interface Itembill {
   _id: string;
   image: string;
   name: string;
@@ -26,23 +27,15 @@ interface product {
 export default IBill
 
 
-export interface IBillItem {
-  _id: string;
-  name: string;
-  email: string;
-  phone: number;
-  address: string,
-  items: product[];
-  total: number;
-}
+
 
 export interface IBillState {
-  BillItems: IBillItem[];
+  BillItems: IBill[];
 }
 
 export interface IBillAddAction {
   type: typeof ADD_TO_BILL;
-  payload: IBillItem;
+  payload: IBill;
 }
 
 export interface IBillRemoveAction {

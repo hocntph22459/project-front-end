@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../../redux/actions/cart/cartActions';
-import CheckoutPage from '../Checkout';
 import EmptyCart from './components/EmptyCart';
+import { Link } from 'react-router-dom';
+import CheckoutCart from './components/CheckoutCart';
 function CartPage() {
     const dispatch = useDispatch<any>();
     const handleRemove = (id: string) => {
@@ -13,9 +14,11 @@ function CartPage() {
     return (
         <>
             {cartItems.length === 0 ? (
+                // empty cart items
                 <EmptyCart />
             ) : (
                 <div className="bg-gray-100 py-[80px]">
+                    <p className=" focus:outline-none px-4 mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600"><Link to="/">Home</Link> / <Link to="/cart">cart</Link> / checkout</p>
                     <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
                     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
                         <div className="rounded-lg md:w-2/3">
@@ -67,8 +70,8 @@ function CartPage() {
                                 )
                             })}
                         </div>
-                        {/* checkout page */}
-                        <CheckoutPage totalPrice={totalPrice} />
+                        {/* checkout cart */}
+                        <CheckoutCart totalPrice={totalPrice} />
                     </div>
                 </div>
             )}

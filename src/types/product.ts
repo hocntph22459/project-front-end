@@ -6,28 +6,34 @@ export interface IProduct {
   salePrice: number;
   images: string[];
   description: string;
-  size: number[];
+  sizes: Sizes[];
   quantity: number;
   views: number;
   tags: Tag[];
-  CategoryId: any;
+  CategoryId: Category[];
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null,
 }
 
 export interface IProductDetail {
-  data:IProduct;
-  relatedProducts:IProduct[]
-  message:string;
+  data: IProduct;
+  relatedProducts: IProduct[]
+  message: string;
+}
+
+interface Sizes {
+  size: number;
+  quantity: number;
 }
 
 interface Tag {
   _id: string;
   name: string;
   products: string[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date | null,
 }
 
 

@@ -58,7 +58,7 @@ const ForgotPassword = () => {
     return (
         <>
             <p className='text-[14px]' onClick={showModalForgot}>
-                quên mật khẩu
+                Forgot password
             </p>
             <Modal footer={null} open={isModalOpen} onOk={handleOkForgot} onCancel={handleCancelForgot}>
                 <Form className="mt-[30px] w-[400px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
@@ -94,7 +94,7 @@ const ForgotPassword = () => {
                         htmlType="submit"
                         className="w-full h-[52px] text-center py-3 rounded bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
                     >
-                        Xác nhận
+                        Forgot password
                     </Button>
                 </Form>
 

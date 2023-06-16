@@ -67,67 +67,67 @@ const FormCreateContact = (props: Props) => {
                         label="name"
                         rules={[
                             {
-                                message: 'vui lòng nhập name!',
+                                message: 'please enter name!',
                                 required: true,
                             },
                         ]}
                     >
-                        <Input className='h-10 border rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="nhập name" />
+                        <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter name" />
                     </MyFormItem>
                     <MyFormItem
                         name="email"
                         label="Email"
                         rules={[
                             {
-                                message: 'vui lòng nhập email!',
+                                message: 'please enter email!',
                                 required: true,
                                 type: 'email'
                             },
                         ]}
                     >
-                        <Input className='h-10 border rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="nhập email" />
+                        <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter email" />
                     </MyFormItem>
                     <MyFormItem
                         name="phone"
                         label="phone"
                         rules={[
                             {
-                                message: 'vui lòng nhập phone!',
+                                message: 'please enter phone!',
                                 required: true,
                             },
                         ]}
                     >
-                        <Input className='h-10 border rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="nhập phone" />
+                        <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter phone" />
                     </MyFormItem>
                     <MyFormItem
                         name="address"
                         label="address"
                         rules={[
                             {
-                                message: 'vui lòng nhập address!',
+                                message: 'please enter address!',
                                 required: true,
                             },
                         ]}
                     >
-                        <Input className='h-10 border rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="nhập address" />
+                        <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter address" />
                     </MyFormItem>
                     <MyFormItem
                         name="support"
                         label="support"
                         rules={[
                             {
-                                message: 'vui lòng nhập support!',
+                                message: 'please enter support!',
                                 required: true,
                             },
                         ]}
                     >
-                        <Input.TextArea className='border rounded-md px-4 py-2 text-lg' rows={4} />
+                        <Input.TextArea className='border border-indigo-600 rounded-md px-4 py-2 text-lg' rows={4} />
                     </MyFormItem>
                     <Button
                         htmlType="submit"
                         className="w-full rounded-lg h-12 text-center py-3 bg-black text-white hover:bg-green-dark focus:outline-none my-1"
                     >
-                        Gửi Ngay
+                        Send Now
                     </Button>
                 </Form>
             </div>

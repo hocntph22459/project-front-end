@@ -91,7 +91,7 @@ const Router = () => {
                     </Route>
                     <Route path='abouts'>
                         <Route index element={<ManageAbout />} />
-                        <Route path=':id/update' element={<ManageAboutUpdate />} />
+                        <Route path=':id/update' element={<ManageAboutUpdate/>} />
                     </Route>
                     <Route path='bill'>
                         <Route index element={<ManageBill />} />

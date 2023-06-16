@@ -62,7 +62,7 @@ const ManageBill = () => {
       key: 'total'
     },
     {
-      title: 'sản phẩm',
+      title: 'items',
       dataIndex: 'items',
       key: 'items',
     },

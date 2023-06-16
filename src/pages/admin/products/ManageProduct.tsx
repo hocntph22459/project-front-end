@@ -90,7 +90,7 @@ const ManagementProduct = (props: Props) => {
     name: item.name,
     price: item.price,
     quantity: item.quantity,
-    size: item.size,
+    size: item.sizes,
     images: item.images,
     description: item.description,
     createdAt: item.createdAt,

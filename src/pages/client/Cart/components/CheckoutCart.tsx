@@ -2,9 +2,9 @@ import { Form, FormItemProps, Input, message } from 'antd';
 import { createContext, useContext, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useSelector } from 'react-redux';
-import { CreateBill } from '../../../api/bill';
+import { CreateBill } from '../../../../api/bill';
 import { useNavigate } from 'react-router-dom';
-import SigninPage from '../SigninPage';
+import SigninPage from '../../SigninPage';
 const MyFormItemContext = createContext<(string | number)[]>([]);
 function toArr(str: string | number | (string | number)[]): (string | number)[] {
     return Array.isArray(str) ? str : [str];
@@ -15,7 +15,7 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
     return <Form.Item name={concatName} {...props} />;
 };
 
-const CheckoutPage = ({ totalPrice }: any) => {
+const CheckoutCart = ({ totalPrice }: any) => {
     const user:any = localStorage.getItem("user");
     const userParse = JSON.parse(user)
     const navigate = useNavigate()
@@ -159,4 +159,4 @@ const CheckoutPage = ({ totalPrice }: any) => {
         </div>
     )
 }
-export default CheckoutPage
+export default CheckoutCart

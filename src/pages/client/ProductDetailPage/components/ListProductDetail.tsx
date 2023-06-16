@@ -17,11 +17,12 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
     const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
     return <Form.Item name={concatName} {...props} />;
 };
+
 const ListProductDetail = (props: Props) => {
     const dispatch = useDispatch<any>();
     const onFinish = async (values: IProduct) => {
         const cartData: any = {
-            size: values.size,
+            size: values.sizes,
             quantity: values.quantity,
             productId: props.product.data._id
         }
@@ -100,32 +101,32 @@ const ListProductDetail = (props: Props) => {
                                     <MyFormItem className='w-[200px]'
                                         rules={[
                                             {
-                                                message: 'vui lòng nhập size!',
+                                                message: 'please enter size!',
                                                 required: true,
                                             },
                                         ]}
-                                        name="size"
+                                        name="sizes"
                                         label="choose shoe size"
                                     >
                                         <Select placeholder="37"
                                             className="border text-black border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            options={props.product.data.size.map((size) => ({
-                                                label: size,
-                                                value: size,
+                                            options={props.product.data.sizes.map((atb) => ({
+                                                label: atb.size,
+                                                value: atb.size,
                                             }))}
                                         />
                                     </MyFormItem>
                                     <MyFormItem className='w-[200px]'
                                         rules={[
                                             {
-                                                message: 'vui lòng nhập quantity!',
+                                                message: 'please enter quantity!',
                                                 required: true,
                                             },
                                         ]}
                                         name="quantity"
                                         label="quantity"
                                     >
-                                        <Input type='number' min={1} max={props.product.data.quantity} className='h-10' placeholder="1" />
+                                        <Input type='number' min={1} max={5} className='h-10' placeholder="1" />
                                     </MyFormItem>
                                 </div>
                                 <div className="flex gap-4 mb-6">
