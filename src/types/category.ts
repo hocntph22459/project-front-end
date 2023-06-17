@@ -10,10 +10,15 @@ export interface ICategory {
 
 export interface Product {
   _id: string;
+  key: string;
   name: string;
-  price: string;
+  price: number;
+  salePrice: number;
   images: string[];
   description: string;
+  sizes: Sizes[];
+  quantity: number;
+  views: number;
   tags: Tag[];
   CategoryId: Category[];
   createdAt?: Date;
@@ -21,6 +26,10 @@ export interface Product {
   deletedAt?: Date | null,
 }
 
+interface Sizes {
+  size: number;
+  quantity: number;
+}
 interface Tag {
   _id: string;
   name: string;

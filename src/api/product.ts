@@ -9,6 +9,9 @@ export const GetProductSale = () => {
 export const SearchProduct = (name: string) => {
     return intansce.get('/products/search?name=' + name)
 }
+export const FindProductByPrice = (min:number,max:number) => {
+    return intansce.get(`/products/filter/price?minPrice=${min}&maxPrice=${max}&sortType=desc`)
+}
 export const FilterProductByCategory = (id: string) => {
     if (id === null || id === undefined) {
         return intansce.get('/products')

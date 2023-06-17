@@ -1,10 +1,9 @@
 import { IProduct } from '../../../../types/product'
 import { Link } from 'react-router-dom'
-
+import ModalAddtocart from '../../../../components/ModalAddtocart'
 type Props = {
   products: IProduct[],
 }
-
 const ListProducts = (props: Props) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -20,9 +19,7 @@ const ListProducts = (props: Props) => {
               <h5 className='text-[18px] font-bold truncate'>{item.name}</h5>
               <p className='my-8 text-[#F54748] text-[20px] font-bold'>${item.price}</p>
             </div>
-            <div className="item-add">
-              <button className='bg-black text-white w-full h-[42px] rounded-xl'>Add To Cart</button>
-            </div>
+            <ModalAddtocart product={item} />
           </div>
         )
       })}
@@ -30,4 +27,4 @@ const ListProducts = (props: Props) => {
   )
 }
 
-export default ListProducts
+export default ListProducts;

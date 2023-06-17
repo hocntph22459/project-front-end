@@ -21,13 +21,13 @@ export default function HeaderLayoutClient() {
                                 <Link to='/' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Home</Link>
                             </li>
                             <li className="pb-3">
-                                <Link to='/products' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">products</Link>
+                                <Link to='/products' className="text-sm text-gray-700 hover:text-blue-400 font-bold dark:text-gray-400">Products</Link>
                             </li>
                             <li className="pb-3">
-                                <Link to='/products/sales' className="text-sm text-[red] font-bold">news sale</Link>
+                                <Link to='/products/sales' className="text-sm text-[red] font-bold">News Sale</Link>
                             </li>
                             <li className="pb-3">
-                                <Link to='/contacts' className="text-sm text-gray-700 font-bold hover:text-blue-400 dark:text-gray-400">contacts</Link>
+                                <Link to='/contacts' className="text-sm text-gray-700 font-bold hover:text-blue-400 dark:text-gray-400">Contacts-Us</Link>
                             </li>
                         </ul>
                     </div>
@@ -73,13 +73,13 @@ export default function HeaderLayoutClient() {
                                 <Link to="/">Home</Link>
                             </Menu.Item>
                             <Menu.Item key="products">
-                                <Link to="/products">product</Link>
+                                <Link to="/products">Products</Link>
                             </Menu.Item>
                             <Menu.Item key="products/sales">
-                                <Link to="/products/sales">new sale</Link>
+                                <Link to="/products/sales">News Sale</Link>
                             </Menu.Item>
                             <Menu.Item key="contacts">
-                                <Link to="/contacts">contact</Link>
+                                <Link to="/contacts">Contact-Us</Link>
                             </Menu.Item>
                         </Menu>
                     </div>

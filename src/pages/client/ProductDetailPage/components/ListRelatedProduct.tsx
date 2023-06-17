@@ -1,4 +1,5 @@
 import { IProductDetail } from "../../../../types/product";
+import ModalAddtocart from "../../../../components/ModalAddtocart";
 type Props = {
     product: IProductDetail
 }
@@ -11,8 +12,8 @@ const ListRelatedProduct = (props: Props) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
                 {props.product.relatedProducts.map((item: any) => {
                     return (
-                        <a className="bg-white p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" key={item._id} href={`/products/` + item._id}>
-                            <div className="products-item" key={item._id}>
+                        <div className="products-item" key={item._id}>
+                            <a className="bg-white p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" key={item._id} href={`/products/` + item._id}>
                                 <div>
                                     <img className="w-full" src={item.images[0]} alt="" />
                                 </div>
@@ -20,11 +21,9 @@ const ListRelatedProduct = (props: Props) => {
                                     <h5 className="text-[18px] font-bold truncate">{item.name}</h5>
                                     <p className="my-8 text-[#F54748] text-[20px] font-bold">${item.price}</p>
                                 </div>
-                                <div className="item-add">
-                                    <button className="bg-black text-white w-full h-[42px] rounded-xl">Add To Cart</button>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                            <ModalAddtocart product={item} />
+                        </div>
                     );
                 })}
             </div>

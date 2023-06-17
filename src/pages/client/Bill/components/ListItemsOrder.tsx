@@ -11,7 +11,7 @@ const ListItemsOrder = (props: Props) => {
                 click xem sản phẩm
             </button>
             <Modal
-                title="items bill"
+                title="items order"
                 centered
                 open={open}
                 onOk={() => setOpen(false)}
