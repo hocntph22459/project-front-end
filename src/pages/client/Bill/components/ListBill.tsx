@@ -1,5 +1,5 @@
 import IBill from '../../../../types/bill'
-import ListItemsOrder from './ListItemsOrder'
+import ListItemsOrder from '../../../../components/ListItemsOrder'
 
 type Props = {
     orders: IBill[]

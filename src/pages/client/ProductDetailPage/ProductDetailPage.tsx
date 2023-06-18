@@ -9,7 +9,7 @@ const ProductDetailPage = () => {
   const [product, setproduct] = useState<IProductDetail>()
   useEffect(() => {
     GetOneProduct(id)
-      .then(({ data }) => setproduct(data))
+      .then((data: any) => setproduct(data))
   }, [])
   if (!product) return null;
   return (

@@ -7,7 +7,7 @@ const ProductSale = () => {
     const [ProductSale,setProductSale] = useState<IProduct[]>([])
     useEffect(()=>{
         GetProductSale()
-        .then(({ data }) => setProductSale(data.data))
+        .then(({ data }) => setProductSale(data))
     },[])
   return (
     <section>

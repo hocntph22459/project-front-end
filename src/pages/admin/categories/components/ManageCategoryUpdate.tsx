@@ -12,20 +12,16 @@ const ManageCategoryUpdate = (props: Props) => {
   const onFinish = async (values: ICategory) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await UpdateCategory(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('successfully update categories', 3);
         navigate('/admin/categories');
         // GetAllCategory().then(({ data }) => setcategories(data));
       }
-    } catch (error: any) {
-      if (error.response) {
-        message.error(error.response.data.message, 5);
-      } else {
-        message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-      }
+    } catch (error) {
+        message.error('Failed to update categories', 5);
     }
   };
   const [categories, setcategories] = useState<ICategory>();

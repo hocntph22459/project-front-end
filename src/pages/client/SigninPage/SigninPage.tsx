@@ -3,10 +3,11 @@ import { Button, Form, FormItemProps, Input, Modal } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import { Signin } from '../../../api/auth';
-import IUser from '../../../types/user';
+import IUser, { LoginResponse } from '../../../types/user';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import ForgotPassword from '../ForgotPassword';
+import { AxiosResponse } from 'axios';
 const MyFormItemContext = React.createContext<(string | number)[]>([]);
 
 function toArr(str: string | number | (string | number)[]): (string | number)[] {
@@ -30,12 +31,14 @@ const SigninPage = () => {
                 try {
                     const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
                     if (loading) {
-                        const response = await Signin(value);
+                        const response: AxiosResponse<LoginResponse> = await Signin(value);
                         if (response) {
-                            localStorage.setItem('accessToken', (response.data.accessToken));
-                            localStorage.setItem('user', JSON.stringify(response.data.user));
-                            message.success(response.data.message, 3);
-                            navigate('/')
+                            const data: any = response
+                            localStorage.setItem('accessToken', data.accessToken);
+                            localStorage.setItem('refreshToken', data.refreshToken);
+                            localStorage.setItem('user', JSON.stringify(data.user));
+                            message.success(data.message, 3);
+                            navigate('/');
                         }
                     }
 

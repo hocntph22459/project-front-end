@@ -1,4 +1,4 @@
-import {useState } from 'react';
+import { useState } from 'react';
 import {
   Button, Form, Input, Select, message,
 } from 'antd';
@@ -25,18 +25,8 @@ const getBase64 = (file: RcFile): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 const ManagementProductCreate = (props: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  const [open, setOpen] = useState(false);
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancelProduct = () => {
-    setIsModalOpen(false);
-  };
   const navigate = useNavigate();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -83,33 +73,37 @@ const ManagementProductCreate = (props: Props) => {
       values.images = res.secure_url;
       console.log(values)
       const key = 'loading'
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 })
       if (loading) {
         const response = await CreateProduct(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('create successfully Product', 3);
         navigate('/admin/post');
-        // GetAllProduct().then(({ data }) => setproducts(data.data))
+        // GetAllProduct().then(({ data }) => setproducts(data))
       }
-    } catch (error: any) {
-      message.error(error.message || 'lỗi khi thêm bài viết!');
+    } catch (error) {
+      message.error('Failed to create product');
     }
   };
   return (
     <>
-      <Button className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center" onClick={showModal}>
+      <Button className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center" onClick={() => setOpen(true)}>
         <PlusOutlined />
       </Button>
-      <Modal className='w-[1000px]' open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancelProduct}>
-      <div className="title">
-          <h2 className='text-center text-[24px] font-bold'>Create product</h2>
-        </div>
+      <Modal
+        title="Create product"
+        centered
+        open={open}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        width={1000}
+        footer={null}
+      >
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={onFinish}
-          className="max-w-[1000px] mx-auto"
         >
           <Form.Item name="name" label="name" rules={[{ message: 'vui lòng nhập name!', required: true }]}>
             <Input />

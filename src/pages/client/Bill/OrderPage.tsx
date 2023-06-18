@@ -11,10 +11,9 @@ const OrderPage = () => {
     const [orders, setorders] = useState<IBill[]>([])
     useEffect(() => {
         if (userParse && userParse._id) {
-            GetBillByUser(userParse._id).then(({ data }) => setorders(data.data))
+            GetBillByUser(userParse._id).then(({ data }) => setorders(data))
         }
     }, [])
-    console.log(orders)
     return (
         <>
             {orders.length === 0 ? (

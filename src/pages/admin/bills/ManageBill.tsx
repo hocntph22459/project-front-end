@@ -5,29 +5,26 @@ import { RemoveAbout } from '../../../api/about';
 import { Link } from 'react-router-dom';
 import { GetAllBill } from '../../../api/bill';
 import IBill from '../../../types/bill';
+import ListItemsOrder from '../../../components/ListItemsOrder';
 
 const ManageBill = () => {
   // api comment 
   const [bills, setbills] = useState<IBill[]>([])
   useEffect(() => {
-    GetAllBill().then(({ data }) => setbills(data.data))
+    GetAllBill().then(({ data }) => setbills(data))
   }, [])
   const HandleRemoveBill = async (id: string) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await RemoveAbout(id);
         if (response)
-          message.success(response.data.message, 3);
-        //  GetAllComment().then(({ data }) => setbills(data.data))
+          message.success('successfully delete', 3);
+        //  GetAllComment().then(({ data }) => setbills(data))
       }
-    } catch (error: any) {
-      if (error.response) {
-        message.error(error.response.data.message, 5);
-      } else {
-        message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-      }
+    } catch (error) {
+        message.error('Failed delete', 5);
     }
   }
   const columns = [
@@ -63,8 +60,11 @@ const ManageBill = () => {
     },
     {
       title: 'items',
-      dataIndex: 'items',
       key: 'items',
+      render: (bill: IBill) =>
+        <>
+          <ListItemsOrder bill={bill} />
+        </>
     },
     {
       title: 'status',
@@ -73,9 +73,10 @@ const ManageBill = () => {
     },
     {
       title: 'action',
+      key: 'action',
       render: (item: IBill) =>
         <>
-          <Link to={`/admin/bills/${item.key}/update`}>
+          <Link to={`/admin/order/bill/${item.key}/update`}>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><EditOutlined /></button>
           </Link>
           <button type="button"
@@ -96,7 +97,7 @@ const ManageBill = () => {
       phone: item.phone,
       address: item.address,
       total: item.total,
-      items: item.items.length,
+      items: item.items,
       status: item.status
     }
   })

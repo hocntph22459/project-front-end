@@ -8,24 +8,20 @@ const ManageUser = () => {
   // api users 
   const [users, setusers] = useState<IUser[]>([])
   useEffect(() => {
-    GetAllUser().then(({ data }) => setusers(data.data))
+    GetAllUser().then(({ data }) => setusers(data))
   }, [])
   const HandleRemoveUser = async (id: string) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await RemoveUser(id);
         if (response)
-          message.success(response.data.message, 3);
-        GetAllUser().then(({ data }) => setusers(data.data))
+          message.success('successfully delete account', 3);
+        GetAllUser().then(({ data }) => setusers(data))
       }
-    } catch (error: any) {
-      if (error.response) {
-        message.error(error.response.data.message, 5);
-      } else {
-        message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-      }
+    } catch (error) {
+        message.error('delete failed account', 5);
     }
   }
   const columns = [

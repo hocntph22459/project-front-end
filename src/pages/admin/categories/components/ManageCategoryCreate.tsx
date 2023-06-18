@@ -7,7 +7,7 @@ import { PlusOutlined } from "@ant-design/icons"
 
 const ManageCategoryCreate = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal= () => {
+  const showModal = () => {
     setIsModalOpen(true);
   };
 
@@ -23,20 +23,16 @@ const ManageCategoryCreate = () => {
   const onFinish = async (values: ICategory) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await CreateCategory(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('successfully Create categories', 3);
         navigate('/admin/categories')
         // GetAllCategory().then(({ data }) => setcategories(data));
       }
-    } catch (error: any) {
-      if (error.response) {
-        message.error(error.response.data.message, 5);
-      } else {
-        message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-      }
+    } catch (error) {
+      message.error('Failed Create categories', 5);
     }
   };
   return (

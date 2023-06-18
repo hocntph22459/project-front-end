@@ -9,12 +9,12 @@ type Props = {
   categories: ICategory[]
 }
 const ProductPage = (props: Props) => {
+  const [products, setproducts] = useState<IProduct[]>([])
   const location = useLocation();
   // Lấy giá trị của cateId từ location.search sau đó loại bỏ dấu ? ở đầu
   const cateId: any = new URLSearchParams(location.search).get("cateId");
-  const [products, setproducts] = useState<IProduct[]>([])
   useEffect(() => {
-    FilterProductByCategory(cateId).then(({ data }) => setproducts(data.data))
+    FilterProductByCategory(cateId).then(({ data }) => setproducts(data))
   }, [cateId])
   return (
     <section>

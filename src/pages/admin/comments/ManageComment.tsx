@@ -8,24 +8,20 @@ const ManageComment = () => {
  // api comment 
  const [comments, setcomments] = useState<IComment[]>([])
  useEffect(() => {
-     GetAllComment().then(({ data }) => setcomments(data.data))
+     GetAllComment().then(({ data }) => setcomments(data))
  }, [])
  const HandleRemoveComment = async (id: string) => {
      const key = 'loading';
      try {
-         const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+         const loading = await message.loading({ content: 'loading!', key, duration: 2 });
          if (loading) {
              const response = await RemoveComment(id);
              if (response)
-                 message.success(response.data.message, 3);
-             GetAllComment().then(({ data }) => setcomments(data.data))
+                 message.success('successfully delete comments', 3);
+             GetAllComment().then(({ data }) => setcomments(data))
          }
-     } catch (error: any) {
-         if (error.response) {
-             message.error(error.response.data.message, 5);
-         } else {
-             message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-         }
+     } catch (error) {
+             message.error('Failed delete comments', 5);
      }
  }
   const columns = [

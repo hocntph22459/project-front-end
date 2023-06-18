@@ -9,4 +9,25 @@ interface IUser {
     updatedAt?: Date;
     deletedAt?: Date | null,
 }
-export default IUser 
+export default IUser
+
+
+export interface RegisterResponse {
+    message: string;
+    user: {
+        name: string;
+        email: string;
+        role: string;
+        _id: string;
+        createdAt: string;
+        updatedAt: string;
+    }
+}
+
+
+export interface LoginResponse {
+    message: string;
+    accessToken: string;
+    refreshToken: string;
+    user: IUser
+}

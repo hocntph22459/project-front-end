@@ -21,17 +21,17 @@ const FormCreateContact = (props: Props) => {
         const key = 'loading'
         if (value) {
             try {
-                const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
+                const loading = await message.loading({ content: 'loading!', key, duration: 2 })
                 if (loading) {
                     const response = await CreateContact(value);
-                    if (response && response.data) {
-                        message.success(response.data.message, 3);
+                    if (response) {
+                        message.success('contact sent successfully', 3);
                         Navigate('/')
                     }
                 }
 
             } catch (error: any) {
-                message.error(error.response.data.message, 5);
+                message.error('contact sent failed', 5);
             }
         }
     }

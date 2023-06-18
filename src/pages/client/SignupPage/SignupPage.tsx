@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef, useState } from 'react';
 import { Button, Form, FormItemProps, Input, Modal } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import { Signup } from '../../../api/auth';
 import IUser from '../../../types/user';
@@ -27,11 +27,11 @@ const SignupPage = () => {
             const key = 'loading'
             if (value) {
                 try {
-                    const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
+                    const loading = await message.loading({ content: 'loading!', key, duration: 2 })
                     if (loading) {
-                        const response = await Signup(value);
-                        if (response && response.data) {
-                            message.success(response.data.message, 3);
+                        const response: any = await Signup(value);
+                        if (response) {
+                            message.success(response.message, 3);
                             navigate('/')
                         }
                     }

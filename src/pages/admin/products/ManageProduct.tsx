@@ -15,16 +15,16 @@ const ManagementProduct = (props: Props) => {
   const HandleRemovePost = async (id: string) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await RemoveProduct(id);
         if (response) {
-          message.success(response.data.message, 3);
+          message.success('successfully delete Product', 3);
           props.products = props.products.filter(product => product._id !== id)
         }
       }
     } catch (error: any) {
-      message.error(error.response.data.message, 5);
+      message.error('Failed delete Product', 5);
     }
   }
   const columns = [
@@ -44,7 +44,7 @@ const ManagementProduct = (props: Props) => {
       key: 'price'
     },
     {
-      title: 'quantity',
+      title: 'sizes',
       dataIndex: 'quantity',
       key: 'quantity'
     },

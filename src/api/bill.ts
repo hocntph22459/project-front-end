@@ -5,8 +5,13 @@ export const GetAllBill = () => {
     return intansce.get('/bill')
 }
 
+export const GetOneBill = (id:string) => {
+    return intansce.get('/bill/' + id)
+}
+
+
 export const GetBillByUser = (user_id: string) => {
-    return intansce.get('/bill/' + user_id)
+    return intansce.get('/bill/order/' + user_id)
 }
 
 export const CreateBill = (data: IBill) => {

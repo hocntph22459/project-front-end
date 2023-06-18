@@ -45,12 +45,12 @@ const ForgotPassword = () => {
                     if (loading) {
                         const response = await ForgotPass(value);
                         if (response) {
-                            message.success(response.data.message, 3);
+                            message.success('successfully forgotpassword', 3);
                             navigate('/')
                         }
                     }
-                } catch (error: any) {
-                    message.error(error.response.data.message, 5);
+                } catch (error) {
+                    message.error('forgotpassword failed', 5);
                 }
             }
         }

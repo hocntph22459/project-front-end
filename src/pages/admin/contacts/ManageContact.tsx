@@ -5,29 +5,25 @@ import { GetAllContact, RemoveContact } from '../../../api/contact';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageContact = () => {
-      // api contact 
-      const [contacts, setcontacts] = useState<IContact[]>([])
-      useEffect(() => {
-          GetAllContact().then(({ data }) => setcontacts(data.data))
-      }, [])
-      const HandleRemoveContact = async (id: string) => {
-          const key = 'loading';
-          try {
-              const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
-              if (loading) {
-                  const response = await RemoveContact(id);
-                  if (response)
-                      message.success(response.data.message, 3);
-                  GetAllContact().then(({ data }) => setcontacts(data.data))
-              }
-          } catch (error: any) {
-              if (error.response) {
-                  message.error(error.response.data.message, 5);
-              } else {
-                  message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-              }
-          }
+  // api contact 
+  const [contacts, setcontacts] = useState<IContact[]>([])
+  useEffect(() => {
+    GetAllContact().then(({ data }) => setcontacts(data))
+  }, [])
+  const HandleRemoveContact = async (id: string) => {
+    const key = 'loading';
+    try {
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
+      if (loading) {
+        const response = await RemoveContact(id);
+        if (response)
+          message.success('successfully delete contacts', 3);
+        GetAllContact().then(({ data }) => setcontacts(data))
       }
+    } catch (error) {
+      message.error('delete failed contacts', 5);
+    }
+  }
   const columns = [
     {
       title: 'stt',
@@ -67,12 +63,12 @@ const ManageContact = () => {
     {
       title: 'action',
       render: (item: IContact) => <>
-        <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={() => HandleRemoveContact(item.key)}><DeleteOutlined/></button>
+        <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={() => HandleRemoveContact(item.key)}><DeleteOutlined /></button>
       </>
     },
   ];
 
-  const listData = contacts.map((item,index) => {
+  const listData = contacts.map((item, index) => {
     return {
       key: item._id,
       index: index,

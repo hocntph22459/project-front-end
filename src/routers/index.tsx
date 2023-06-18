@@ -38,21 +38,21 @@ const Router = () => {
     // State product
     const [products, setproducts] = useState<IProduct[]>([])
     useEffect(() => {
-        GetAllProduct().then(({ data }) => setproducts(data.data))
+        GetAllProduct().then(({ data }) => setproducts(data))
     }, [])
 
     // State categories
     const [categories, setcategories] = useState<ICategory[]>([])
     useEffect(() => {
         GetAllCategory()
-            .then(({ data }) => setcategories(data.data))
+            .then(({ data }) => setcategories(data))
     }, [])
 
     // State hashtags
     const [hashtags, sethashtags] = useState<IhashTag[]>([])
     useEffect(() => {
         GetAllHashtag()
-            .then(({ data }) => sethashtags(data.data))
+            .then(({ data }) => sethashtags(data))
     }, [])
 
     return (
@@ -93,7 +93,7 @@ const Router = () => {
                         <Route index element={<ManageAbout />} />
                         <Route path=':id/update' element={<ManageAboutUpdate/>} />
                     </Route>
-                    <Route path='bill'>
+                    <Route path='order/bill'>
                         <Route index element={<ManageBill />} />
                         <Route path=':id/update' element={<ManageBillUpdate />} />
                     </Route>

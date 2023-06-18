@@ -84,16 +84,16 @@ const ManagementProductUpdate = (props: Props) => {
 
       const key = 'loading';
 
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await UpdateProduct(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('update Product seccessfully', 3);
       }
 
       navigate('/admin/product');
-    } catch (error: any) {
-      message.error(error.message || 'lỗi khi thêm bài viết!');
+    } catch (error) {
+      message.error('update Product failed');
     }
   };
 

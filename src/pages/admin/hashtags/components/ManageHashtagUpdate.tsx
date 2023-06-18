@@ -12,19 +12,15 @@ const ManageHashtagUpdate = (props: Props) => {
   const onFinish = async (values: IhashTag) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await UpdateHashtag(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('successfully update hashtags', 3);
         navigate('/admin/hashtags');
       }
     } catch (error: any) {
-      if (error.response) {
-        message.error(error.response.data.message, 5);
-      } else {
-        message.error('Có lỗi xảy ra, vui lòng thử lại sau.', 5);
-      }
+      message.error('update failed hashtags', 5);
     }
   };
   const [hashtags, sethashtags] = useState<IhashTag>();

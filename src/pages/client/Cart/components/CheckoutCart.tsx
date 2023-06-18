@@ -37,12 +37,11 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         items: cartItems,
                         User_id: userParse._id
                     }
-                    console.log(BillData)
                     if (BillData) {
                         try {
-                            const response = await CreateBill(BillData);
-                            if (response && response.data) {
-                                message.success(response.data.message, 3);
+                            const response:any = await CreateBill(BillData);
+                            if (response) {
+                                message.success(response.message, 3);
                                 localStorage.removeItem('cartItems');
                                 navigate('/order/bill')
                             }

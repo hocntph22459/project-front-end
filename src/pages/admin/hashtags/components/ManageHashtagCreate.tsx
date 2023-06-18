@@ -22,17 +22,17 @@ const ManageHashtagCreate = () => {
   const onFinish = async (values: IhashTag) => {
     const key = 'loading'
     try {
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 })
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 })
       if (loading) {
         const response = await CreateHashtag(values);
         if (response)
-          message.success(response.data.message, 3);
-        // GetAllProduct().then(({ data }) => setproducts(data.data))
+          message.success('successfully create hashtags', 3);
+        // GetAllProduct().then(({ data }) => setproducts(data))
         navigate('/admin/hashtags')
       }
 
     } catch (error: any) {
-      message.error(error.response.data.message, 5);
+      message.error('create failed hashtags', 5);
     }
 
   };
@@ -42,7 +42,7 @@ const ManageHashtagCreate = () => {
         <PlusOutlined />
       </Button>
       <Modal open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
-      <div className="title">
+        <div className="title">
           <h2 className='text-center text-[24px] font-bold'>Create hashtag</h2>
         </div>
         <Form layout="vertical" autoComplete="off" form={form} onFinish={onFinish}>
@@ -52,7 +52,7 @@ const ManageHashtagCreate = () => {
               name="name"
               rules={[{ message: 'Không được bỏ trống!', required: true, min: 3 }]}
             >
-              <Input className='w-[450px]'/>
+              <Input className='w-[450px]' />
             </Form.Item>
           </Col>
           <Row>

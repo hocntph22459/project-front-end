@@ -22,7 +22,7 @@ const ManageAboutUpdate = () => {
   const { id }: any = useParams()
   const [about, setabout] = useState<IAbout>();
   useEffect(() => {
-    GetOneAbout(id).then(({ data }) => setabout(data.data))
+    GetOneAbout(id).then(({ data }) => setabout(data))
   }, []);
   const navigate = useNavigate();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -74,16 +74,15 @@ const ManageAboutUpdate = () => {
 
       const key = 'loading';
 
-      const loading = await message.loading({ content: 'đang xử lý!', key, duration: 2 });
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await UpdateAbout(values);
         if (response)
-          message.success(response.data.message, 3);
+          message.success('successfully update', 3);
       }
-
       navigate('/admin/abouts');
-    } catch (error: any) {
-      message.error(error.message || 'failed!');
+    } catch (error) {
+      message.error('Failed to update');
     }
     console.log(values)
   };

@@ -71,7 +71,7 @@ export const items: MenuProps['items'] = [
       <UserOutlined />
     ),
     getItem(
-      <Link to="/admin/bill">Quản lý Đơn hàng</Link>,
+      <Link to="/admin/order/bill">Quản lý Đơn hàng</Link>,
       'bill',
       <ShoppingCartOutlined />
     ),
@@ -98,6 +98,6 @@ export const items: MenuProps['items'] = [
     getItem(<Link to="/admin/accounts">Danh sách tài khoản</Link>, '/admin/accounts'),
   ]),
   getItem('Đơn hàng', 'Đơn hàng', <ShoppingCartOutlined />, [
-    getItem(<Link to="/admin/bill">Danh sách Đơn hàng</Link>, '/admin/bill'),
+    getItem(<Link to="/admin/order/bill">Danh sách Đơn hàng</Link>, '/admin/order/bill'),
   ]),
 ];
