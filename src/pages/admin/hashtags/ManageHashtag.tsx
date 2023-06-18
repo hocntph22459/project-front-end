@@ -1,4 +1,4 @@
-import { Table, Empty, message } from 'antd';
+import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IhashTag from '../../../types/hashtag';
 import { GetAllHashtag, RemoveHashtag } from '../../../api/hashtags';
@@ -13,18 +13,33 @@ const ManageHashtag = () => {
     GetAllHashtag()
       .then(({ data }) => sethashtags(data))
   }, [])
+
   const HandleRemoveHashtag = async (id: string) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveHashtag(id);
-        if (response)
-          message.success('successfully delete hashtags', 3);
-        // GetAllCategory().then(({ data }) => setcategories(data));
-      }
+      // Hiển thị hộp thoại xác nhận trước khi xóa contact
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this contact?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          if (loading) {
+            const response = await RemoveHashtag(id);
+            if (response) {
+              message.success('successfully delete contacts', 3);
+              const dataNew = hashtags.filter(tag => tag._id !== id);
+              sethashtags(dataNew);
+            }
+          }
+        },
+        onCancel: () => {
+          message.success('clicked cancel button')
+        }
+      });
     } catch (error) {
-        message.error('Failed delete hashtags', 5);
+      message.error('delete failed contacts', 5);
     }
   }
   const columns = [

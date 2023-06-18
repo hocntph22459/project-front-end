@@ -1,29 +1,73 @@
-import { Table, Empty, message } from 'antd';
+import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IContact from '../../../types/contact';
 import { GetAllContact, RemoveContact } from '../../../api/contact';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageContact = () => {
-  // api contact 
   const [contacts, setcontacts] = useState<IContact[]>([])
   useEffect(() => {
     GetAllContact().then(({ data }) => setcontacts(data))
   }, [])
+
   const HandleRemoveContact = async (id: string) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveContact(id);
-        if (response)
-          message.success('successfully delete contacts', 3);
-        GetAllContact().then(({ data }) => setcontacts(data))
-      }
+      // Hiển thị hộp thoại xác nhận trước khi xóa contact
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this contact?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          if (loading) {
+            const response = await RemoveContact(id);
+            if (response) {
+              message.success('successfully delete contacts', 3);
+              const dataNew = contacts.filter(contact => contact._id !== id);
+              setcontacts(dataNew);
+            }
+          }
+        },
+        onCancel: () => {
+          message.success('clicked cancel button')
+        }
+      });
     } catch (error) {
       message.error('delete failed contacts', 5);
     }
   }
+
+  const HandleRemoveBill = async (id: string) => {
+    try {
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveContact(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = contacts.filter((data) => data._id !== id);
+              setcontacts(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
+    } catch (error) {
+      message.error('Delete failed!', 5);
+    }
+  };
   const columns = [
     {
       title: 'stt',

@@ -1,4 +1,4 @@
-import { Table, Button, Empty, Input, message, Popconfirm } from 'antd';
+import { Table, Button, Empty, Input, message, Popconfirm, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IUser from '../../../types/user';
 import { GetAllUser, RemoveUser } from '../../../api/user';
@@ -10,20 +10,36 @@ const ManageUser = () => {
   useEffect(() => {
     GetAllUser().then(({ data }) => setusers(data))
   }, [])
+
   const HandleRemoveUser = async (id: string) => {
-    const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveUser(id);
-        if (response)
-          message.success('successfully delete account', 3);
-        GetAllUser().then(({ data }) => setusers(data))
-      }
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveUser(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = users.filter((data) => data._id !== id);
+              setusers(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
     } catch (error) {
-        message.error('delete failed account', 5);
+      message.error('Delete failed!', 5);
     }
-  }
+  };
   const columns = [
     {
       title: 'stt',

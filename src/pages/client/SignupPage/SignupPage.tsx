@@ -31,6 +31,7 @@ const SignupPage = () => {
                     if (loading) {
                         const response: any = await Signup(value);
                         if (response) {
+                            setIsModalOpen(false);
                             message.success(response.message, 3);
                             navigate('/')
                         }

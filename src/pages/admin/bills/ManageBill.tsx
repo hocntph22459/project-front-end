@@ -1,9 +1,8 @@
-import { Table, Empty, message } from 'antd';
+import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
-import { RemoveAbout } from '../../../api/about';
 import { Link } from 'react-router-dom';
-import { GetAllBill } from '../../../api/bill';
+import { GetAllBill, RemoveBill } from '../../../api/bill';
 import IBill from '../../../types/bill';
 import ListItemsOrder from '../../../components/ListItemsOrder';
 
@@ -13,20 +12,36 @@ const ManageBill = () => {
   useEffect(() => {
     GetAllBill().then(({ data }) => setbills(data))
   }, [])
+
   const HandleRemoveBill = async (id: string) => {
-    const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveAbout(id);
-        if (response)
-          message.success('successfully delete', 3);
-        //  GetAllComment().then(({ data }) => setbills(data))
-      }
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveBill(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = bills.filter((data) => data._id !== id);
+              setbills(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
     } catch (error) {
-        message.error('Failed delete', 5);
+      message.error('Delete failed!', 5);
     }
-  }
+  };
   const columns = [
     {
       title: 'stt',

@@ -26,8 +26,8 @@ const ManageHashtagCreate = () => {
       if (loading) {
         const response = await CreateHashtag(values);
         if (response)
-          message.success('successfully create hashtags', 3);
-        // GetAllProduct().then(({ data }) => setproducts(data))
+          setIsModalOpen(false);
+        message.success('successfully create hashtags', 3);
         navigate('/admin/hashtags')
       }
 

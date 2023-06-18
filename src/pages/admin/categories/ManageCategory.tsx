@@ -1,27 +1,45 @@
-import { Table, Empty, message } from 'antd';
+import { Table, Empty, message, Modal } from 'antd';
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons"
 import { ICategory } from '../../../types/category';
-import { RemoveCategory } from '../../../api/categories';
+import { GetAllCategory, RemoveCategory } from '../../../api/categories';
 import { Link } from 'react-router-dom';
 import ManageCategoryAdd from './components/ManageCategoryCreate';
-type Props = {
-  categories: ICategory[]
-}
-const ManageCategory = (props: Props) => {
+import { useEffect, useState } from 'react';
+
+const ManageCategory = () => {
+  const [categories, setcategories] = useState<ICategory[]>([])
+  useEffect(() => {
+    GetAllCategory().then(({ data }) => setcategories(data))
+  }, [])
   const HandleRemoveCategory = async (id: string) => {
-    const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveCategory(id);
-        if (response)
-          message.success('successfully delete categories', 3);
-        // GetAllCategory().then(({ data }) => setcategories(data));
-      }
-    } catch (error: any) {
-        message.error('Failed delete categories', 5);
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveCategory(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = categories.filter((data) => data._id !== id);
+              setcategories(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
+    } catch (error) {
+      message.error('Delete failed!', 5);
     }
-  }
+  };
   const columns = [
     {
       title: 'stt',
@@ -54,7 +72,7 @@ const ManageCategory = (props: Props) => {
     },
   ];
 
-  const data = props.categories.map((item:ICategory,index:number) => {
+  const data = categories.map((item:ICategory,index:number) => {
     return {
       index: index,
       key: item._id,

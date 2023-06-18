@@ -1,32 +1,79 @@
-import { Table, Empty, Image, message } from 'antd';
+import { Table, Empty, Image, message, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { IProduct } from '../../../types/product';
-import { RemoveProduct } from '../../../api/product';
+import { GetAllProduct, RemoveProduct } from '../../../api/product';
 import { Link } from 'react-router-dom';
 import ManagementProductCreate from './components/ManageProductCreate';
 import { ICategory } from '../../../types/category';
 import IhashTag from '../../../types/hashtag';
+import { useEffect, useState } from 'react';
 type Props = {
   products: IProduct[],
   categories: ICategory[],
-  hashtags:IhashTag[]
+  hashtags: IhashTag[]
 }
 const ManagementProduct = (props: Props) => {
-  const HandleRemovePost = async (id: string) => {
+  const [products, setProducts] = useState<IProduct[]>([])
+  useEffect(() => {
+    GetAllProduct().then(({ data }) => setProducts(data))
+  }, [])
+  const HandleRemoveProduct = async (id: string) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveProduct(id);
-        if (response) {
-          message.success('successfully delete Product', 3);
-          props.products = props.products.filter(product => product._id !== id)
+      // Hiển thị hộp thoại xác nhận trước khi xóa contact
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this contact?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          if (loading) {
+            const response = await RemoveProduct(id);
+            if (response) {
+              message.success('successfully delete contacts', 3);
+              const dataNew = products.filter(product => product._id !== id);
+              setProducts(dataNew);
+            }
+          }
+        },
+        onCancel: () => {
+          message.success('clicked cancel button')
         }
-      }
-    } catch (error: any) {
-      message.error('Failed delete Product', 5);
+      });
+    } catch (error) {
+      message.error('delete failed contacts', 5);
     }
   }
+  const HandleRemoveBill = async (id: string) => {
+    try {
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveProduct(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = products.filter((data) => data._id !== id);
+              setProducts(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
+    } catch (error) {
+      message.error('Delete failed!', 5);
+    }
+  };
   const columns = [
     {
       title: 'stt',
@@ -75,7 +122,7 @@ const ManagementProduct = (props: Props) => {
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><EditOutlined /></button>
           </Link>
           <button type="button"
-            onClick={() => HandleRemovePost(item.key)}
+            onClick={() => HandleRemoveProduct(item.key)}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             <DeleteOutlined />
           </button>
@@ -104,7 +151,7 @@ const ManagementProduct = (props: Props) => {
     )
   return (
     <>
-      <ManagementProductCreate  hashtags={props.hashtags} categories={props.categories} />
+      <ManagementProductCreate hashtags={props.hashtags} categories={props.categories} />
       <Table
         columns={columns}
         dataSource={listData}

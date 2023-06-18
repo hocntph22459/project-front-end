@@ -1,4 +1,4 @@
-import { Table, Empty, message, Image } from 'antd';
+import { Table, Empty, message, Image, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { GetAllAbout, RemoveAbout } from '../../../api/about';
@@ -14,19 +14,34 @@ const ManageAbout = () => {
   const HandleRemoveAbout = async (id: string) => {
     const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      if (loading) {
-        const response = await RemoveAbout(id);
-        if (response)
-          message.success('successfully delete about', 3);
-        //  GetAllComment().then(({ data }) => setabouts(data))
-      }
+      Modal.confirm({
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this about?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk: async () => {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
+            const response = await RemoveAbout(id);
+            if (response) {
+              message.success('Deleted successfully!', 3);
+              const dataNew = abouts.filter((about) => about._id !== id);
+              setabouts(dataNew);
+            }
+          }, 2000);
+        },
+        onCancel: () => {
+          message.success('Canceled!');
+        },
+      });
     } catch (error) {
-
-      message.error('Failed delete about', 5);
+      message.error('Delete failed!', 5);
     }
-  }
-
+  };
+  
 const columns = [
   {
     title: 'stt',

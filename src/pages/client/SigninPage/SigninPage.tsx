@@ -33,6 +33,7 @@ const SigninPage = () => {
                     if (loading) {
                         const response: AxiosResponse<LoginResponse> = await Signin(value);
                         if (response) {
+                            setIsModalOpen(false);
                             const data: any = response
                             localStorage.setItem('accessToken', data.accessToken);
                             localStorage.setItem('refreshToken', data.refreshToken);

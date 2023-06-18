@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import HeaderLayoutAdmin from './components/header';
 import SidebarLayoutAdmin from './components/sidebar';
 import MainLayoutAdmin from './components/main';
-const { Header, Footer } = Layout;
+const { Footer } = Layout;
 const LayoutAdmin: React.FC = () => {
   const navigate = useNavigate()
   // const Logout = () => {

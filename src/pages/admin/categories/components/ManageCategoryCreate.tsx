@@ -27,7 +27,8 @@ const ManageCategoryCreate = () => {
       if (loading) {
         const response = await CreateCategory(values);
         if (response)
-          message.success('successfully Create categories', 3);
+          setIsModalOpen(false);
+        message.success('successfully Create categories', 3);
         navigate('/admin/categories')
         // GetAllCategory().then(({ data }) => setcategories(data));
       }
