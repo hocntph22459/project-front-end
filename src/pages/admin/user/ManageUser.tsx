@@ -5,7 +5,6 @@ import { GetAllUser, RemoveUser } from '../../../api/user';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageUser = () => {
-  // api users 
   const [users, setusers] = useState<IUser[]>([])
   useEffect(() => {
     GetAllUser().then(({ data }) => setusers(data))
@@ -18,6 +17,9 @@ const ManageUser = () => {
         content: 'Are you sure you want to delete this about?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
           const loading = message.loading({ content: 'Loading...', duration: 0 });
           setTimeout(async () => {
@@ -76,14 +78,14 @@ const ManageUser = () => {
             okText="Yes"
             cancelText="No"
           >
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveUser(item.key)} ><DeleteOutlined/></button>
+            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => HandleRemoveUser(item.key)} ><DeleteOutlined /></button>
           </Popconfirm>
         }
       </>
     },
   ];
 
-  const data = users.map((item:IUser,index:number) => {
+  const data = users.map((item: IUser, index: number) => {
     return {
       index: index,
       key: item._id,

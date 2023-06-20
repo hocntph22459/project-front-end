@@ -6,7 +6,7 @@ export interface IProduct {
   salePrice: number;
   images: string[];
   description: string;
-  sizes: Sizes[];
+  sizes: ISizes[];
   quantity: number;
   views: number;
   tags: Tag[];
@@ -22,7 +22,8 @@ export interface IProductDetail {
   message: string;
 }
 
-interface Sizes {
+export interface ISizes {
+  _id: string;
   size: number;
   quantity: number;
 }

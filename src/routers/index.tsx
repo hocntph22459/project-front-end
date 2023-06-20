@@ -79,7 +79,7 @@ const Router = () => {
                     <Route index element={<Management />} />
                     <Route path='products'>
                         <Route index element={<ManagementProduct products={products} categories={categories} hashtags={hashtags} />} />
-                        <Route path=':id/update' element={<ManagementProductUpdate products={products} hashtags={hashtags} categories={categories} />} />
+                        <Route path=':id/update' element={<ManagementProductUpdate hashtags={hashtags} categories={categories} />} />
                     </Route>
                     <Route path='categories'>
                         <Route index element={<ManageCategory />} />

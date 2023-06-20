@@ -1,7 +1,5 @@
-import { ADD_TO_BILL, REMOVE_FROM_BILL } from "../redux/contants/bill/bill.type";
-
 interface IBill {
-  _id?: string;
+  _id: string;
   key: string;
   name: string;
   email: string;
@@ -27,20 +25,7 @@ export interface Itembill {
 export default IBill
 
 
-
-
 export interface IBillState {
   BillItems: IBill[];
 }
 
-export interface IBillAddAction {
-  type: typeof ADD_TO_BILL;
-  payload: IBill;
-}
-
-export interface IBillRemoveAction {
-  type: typeof REMOVE_FROM_BILL;
-  payload: string;
-}
-
-export type IBillAction = IBillAddAction | IBillRemoveAction;

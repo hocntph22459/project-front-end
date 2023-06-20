@@ -1,6 +1,6 @@
 import { Table, Empty, Image, message, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
-import { IProduct } from '../../../types/product';
+import { IProduct, ISizes } from '../../../types/product';
 import { GetAllProduct, RemoveProduct } from '../../../api/product';
 import { Link } from 'react-router-dom';
 import ManagementProductCreate from './components/ManageProductCreate';
@@ -17,41 +17,17 @@ const ManagementProduct = (props: Props) => {
   useEffect(() => {
     GetAllProduct().then(({ data }) => setProducts(data))
   }, [])
+
   const HandleRemoveProduct = async (id: string) => {
-    const key = 'loading';
-    try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      // Hiển thị hộp thoại xác nhận trước khi xóa contact
-      Modal.confirm({
-        title: 'Confirm',
-        content: 'Are you sure you want to delete this contact?',
-        okText: 'Yes',
-        cancelText: 'No',
-        onOk: async () => {
-          if (loading) {
-            const response = await RemoveProduct(id);
-            if (response) {
-              message.success('successfully delete contacts', 3);
-              const dataNew = products.filter(product => product._id !== id);
-              setProducts(dataNew);
-            }
-          }
-        },
-        onCancel: () => {
-          message.success('clicked cancel button')
-        }
-      });
-    } catch (error) {
-      message.error('delete failed contacts', 5);
-    }
-  }
-  const HandleRemoveBill = async (id: string) => {
     try {
       Modal.confirm({
         title: 'Confirm',
         content: 'Are you sure you want to delete this about?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
           const loading = message.loading({ content: 'Loading...', duration: 0 });
           setTimeout(async () => {
@@ -78,22 +54,48 @@ const ManagementProduct = (props: Props) => {
     {
       title: 'stt',
       dataIndex: 'index',
-      key: 'index'
+      key: 'index',
+      width: 5
     },
     {
       title: 'name',
       dataIndex: 'name',
-      key: 'name'
+      key: 'name',
     },
     {
       title: 'price',
       dataIndex: 'price',
-      key: 'price'
+      key: 'price',
     },
     {
-      title: 'sizes',
-      dataIndex: 'quantity',
-      key: 'quantity'
+      title: 'salePrice',
+      dataIndex: 'salePrice',
+      key: 'salePrice',
+    },
+    {
+      title: 'size',
+      dataIndex: 'sizes',
+      key: 'sizes',
+      render: (sizes: ISizes[]) => (
+        <>
+          {sizes.map((size) => (
+            <p key={size._id}>{size.size}</p>
+          ))}
+        </>
+      ),
+    },
+    {
+      title: 'quantity',
+      dataIndex: 'sizes',
+      key: 'sizes',
+      render: (sizes: ISizes[]) => (
+        <>
+          {sizes.map((size) => (
+            <p key={size._id}>{size.quantity}</p>
+          ))}
+        </>
+      ),
+      width: 20
     },
     {
       title: 'images',
@@ -106,13 +108,7 @@ const ManagementProduct = (props: Props) => {
               <Image style={{ width: 50, height: 50 }} src={image} alt="" key={index} />
             ))}
           </Image.PreviewGroup>
-        </>
-
-    },
-    {
-      title: 'created At',
-      dataIndex: 'createdAt',
-      key: 'createdAt'
+        </>,
     },
     {
       title: 'action',
@@ -130,14 +126,15 @@ const ManagementProduct = (props: Props) => {
     },
   ];
 
-  const listData = Array.from(props.products).map((item: IProduct, index: Number) => ({
+  const listData = Array.from(products).map((item: IProduct, index: Number) => ({
     key: item._id,
     index: index,
     href: '/post/' + item._id,
     name: item.name,
     price: item.price,
+    salePrice: item.salePrice,
     quantity: item.quantity,
-    size: item.sizes,
+    sizes: item.sizes,
     images: item.images,
     description: item.description,
     createdAt: item.createdAt,

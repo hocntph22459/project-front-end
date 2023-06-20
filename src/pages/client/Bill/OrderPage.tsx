@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { GetBillByUser } from '../../../api/bill'
-import EmptyCart from '../Cart/components/EmptyCart';
+import EmptyCart from '../../../components/EmptyCart';
 import IBill from '../../../types/bill';
 import { Link } from 'react-router-dom';
 import ListBill from './components/ListBill';
+import IUser from '../../../types/user';
 
 const OrderPage = () => {
-    const user: any = localStorage.getItem("user");
+    const user = localStorage.getItem("user");
     const userParse = user ? JSON.parse(user) : null;
     const [orders, setorders] = useState<IBill[]>([])
     useEffect(() => {

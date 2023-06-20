@@ -14,7 +14,6 @@ const ManageContact = () => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      // Hiển thị hộp thoại xác nhận trước khi xóa contact
       Modal.confirm({
         title: 'Confirm',
         content: 'Are you sure you want to delete this contact?',
@@ -46,6 +45,9 @@ const ManageContact = () => {
         content: 'Are you sure you want to delete this about?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
           const loading = message.loading({ content: 'Loading...', duration: 0 });
           setTimeout(async () => {

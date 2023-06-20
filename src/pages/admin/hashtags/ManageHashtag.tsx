@@ -7,7 +7,6 @@ import { DeleteOutlined,EditOutlined } from "@ant-design/icons"
 import ManageHashtagCreate from './components/ManageHashtagCreate';
 
 const ManageHashtag = () => {
-  // State hashtags
   const [hashtags, sethashtags] = useState<IhashTag[]>([])
   useEffect(() => {
     GetAllHashtag()
@@ -15,33 +14,37 @@ const ManageHashtag = () => {
   }, [])
 
   const HandleRemoveHashtag = async (id: string) => {
-    const key = 'loading';
     try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      // Hiển thị hộp thoại xác nhận trước khi xóa contact
       Modal.confirm({
         title: 'Confirm',
-        content: 'Are you sure you want to delete this contact?',
+        content: 'Are you sure you want to delete this about?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
-          if (loading) {
+          const loading = message.loading({ content: 'Loading...', duration: 0 });
+          setTimeout(async () => {
+            if (loading) {
+              loading();
+            }
             const response = await RemoveHashtag(id);
             if (response) {
-              message.success('successfully delete contacts', 3);
-              const dataNew = hashtags.filter(tag => tag._id !== id);
+              message.success('Deleted successfully!', 3);
+              const dataNew = hashtags.filter((data) => data._id !== id);
               sethashtags(dataNew);
             }
-          }
+          }, 2000);
         },
         onCancel: () => {
-          message.success('clicked cancel button')
-        }
+          message.success('Canceled!');
+        },
       });
     } catch (error) {
-      message.error('delete failed contacts', 5);
+      message.error('Delete failed!', 5);
     }
-  }
+  };
   const columns = [
     {
       title: 'stt',

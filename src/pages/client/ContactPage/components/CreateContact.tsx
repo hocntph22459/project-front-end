@@ -13,9 +13,8 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
     const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
     return <Form.Item name={concatName} {...props} />;
 };
-type Props = {}
 
-const FormCreateContact = (props: Props) => {
+const FormCreateContact = () => {
     const Navigate = useNavigate()
     const onFinish = async (value: IContact) => {
         const key = 'loading'

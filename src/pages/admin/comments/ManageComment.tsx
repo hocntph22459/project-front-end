@@ -19,6 +19,9 @@ const ManageComment = () => {
         content: 'Are you sure you want to delete this contact?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
           if (loading) {
             const response = await RemoveComment(id);

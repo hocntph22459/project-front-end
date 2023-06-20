@@ -8,7 +8,7 @@ const ListItemsOrder = (props: Props) => {
     return (
         <>
             <button className='items-center' onClick={() => setOpen(true)}>
-                click xem sản phẩm
+                Click to view the product
             </button>
             <Modal
                 title="items order"

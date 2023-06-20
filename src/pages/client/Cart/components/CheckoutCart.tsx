@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { CreateBill } from '../../../../api/bill';
 import { useNavigate } from 'react-router-dom';
 import SigninPage from '../../SigninPage';
+import IBill from '../../../../types/bill';
 const MyFormItemContext = createContext<(string | number)[]>([]);
 function toArr(str: string | number | (string | number)[]): (string | number)[] {
     return Array.isArray(str) ? str : [str];
@@ -16,13 +17,13 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
 };
 
 const CheckoutCart = ({ totalPrice }: any) => {
-    const user:any = localStorage.getItem("user");
-    const userParse = JSON.parse(user)
+    const user = localStorage.getItem("user");
+    const userParse = user ? JSON.parse(user) : null;
     const navigate = useNavigate()
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const cartItems = useSelector((state: any) => state.cart.cartItems);
-    const onFinish = async (value: any) => {
+    const onFinish = async (value: IBill) => {
         if (isVerified === true) {
             const key = 'loading'
             if (value) {

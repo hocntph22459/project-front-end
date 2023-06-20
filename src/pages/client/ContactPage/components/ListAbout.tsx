@@ -132,7 +132,5 @@ const ListAbout = () => {
                 })
             }</section>
     )
-
 }
-
 export default ListAbout

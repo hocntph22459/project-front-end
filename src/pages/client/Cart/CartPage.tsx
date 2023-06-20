@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../../redux/actions/cart/cartActions';
-import EmptyCart from './components/EmptyCart';
+import EmptyCart from '../../../components/EmptyCart';
 import { Link } from 'react-router-dom';
 import CheckoutCart from './components/CheckoutCart';
 function CartPage() {
@@ -14,7 +14,6 @@ function CartPage() {
     return (
         <>
             {cartItems.length === 0 ? (
-                // empty cart items
                 <EmptyCart />
             ) : (
                 <div className="bg-gray-100 py-[80px]">
