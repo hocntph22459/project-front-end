@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
-import { GetAllAbout } from "../../../../api/about"
-import IAbout from "../../../../types/about"
+import { Spin } from "antd";
+import useFetchData from "../../../../hooks/useFetchData";
+import IAbout from "../../../../types/about";
 
 const ListAbout = () => {
-    const [about, setabout] = useState<IAbout[]>([])
-    useEffect(() => {
-        GetAllAbout().then(({ data }) => setabout(data))
-    }, [])
+    const { data, loading, error } = useFetchData("/abouts");
+    const isLoading = loading;
     return (
         <section>
-            {
-                about.map((infor) => {
+            {isLoading ? <div className="my-example bg-gray-100 rounded-md p-6 text-center mb-6">
+                <Spin />
+            </div> :
+                data.map((infor: IAbout) => {
                     return (
                         <div key={infor._id} className="flex flex-wrap mb-8 -mx-4">
                             <div className="w-full px-4 mb-4 lg:w-1/3 lg:mb-0">
@@ -130,7 +130,8 @@ const ListAbout = () => {
                         </div>
                     )
                 })
-            }</section>
+            }
+        </section>
     )
 }
 export default ListAbout

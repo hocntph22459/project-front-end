@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
 import IhashTag from '../../../../types/hashtag';
-import { UpdateHashtag } from '../../../../api/hashtags';
-type Props = {
-  hashtags: IhashTag[],
-}
-const ManageHashtagUpdate = (props: Props) => {
+import { GetOneHashtag, UpdateHashtag } from '../../../../api/hashtags';
+
+const ManageHashtagUpdate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id }: string | any = useParams();
+  const [hashtag, sethashtag] = useState<IhashTag>()
+  useEffect(() => {
+    GetOneHashtag(id).then(({ data }) => sethashtag(data))
+  }, [])
   const onFinish = async (values: IhashTag) => {
     const key = 'loading';
     try {
@@ -23,15 +25,11 @@ const ManageHashtagUpdate = (props: Props) => {
       message.error('update failed hashtags', 5);
     }
   };
-  const [hashtags, sethashtags] = useState<IhashTag>();
-  useEffect(() => {
-    const response = props.hashtags.find((item: any) => item._id == id);
-    sethashtags(response);
-  }, [props]);
-  if (!hashtags) return null;
+
+  if (!hashtag) return null;
   const initial = {
-    _id: hashtags._id,
-    name: hashtags.name,
+    _id: hashtag._id,
+    name: hashtag.name,
   };
   return (
     <Form layout="vertical" autoComplete="off" onFinish={onFinish} initialValues={initial}>

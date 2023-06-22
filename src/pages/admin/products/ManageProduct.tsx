@@ -4,15 +4,9 @@ import { IProduct, ISizes } from '../../../types/product';
 import { GetAllProduct, RemoveProduct } from '../../../api/product';
 import { Link } from 'react-router-dom';
 import ManagementProductCreate from './components/ManageProductCreate';
-import { ICategory } from '../../../types/category';
-import IhashTag from '../../../types/hashtag';
 import { useEffect, useState } from 'react';
-type Props = {
-  products: IProduct[],
-  categories: ICategory[],
-  hashtags: IhashTag[]
-}
-const ManagementProduct = (props: Props) => {
+
+const ManagementProduct = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   useEffect(() => {
     GetAllProduct().then(({ data }) => setProducts(data))
@@ -148,7 +142,7 @@ const ManagementProduct = (props: Props) => {
     )
   return (
     <>
-      <ManagementProductCreate hashtags={props.hashtags} categories={props.categories} />
+      <ManagementProductCreate />
       <Table
         columns={columns}
         dataSource={listData}

@@ -1,20 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { ICategory } from '../../../../types/category'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
-import { fetchCategories } from '../../../../redux/actions/categories/categoriesAction'
-import { RootState } from '../../../../redux/reducers'
-import { ThunkDispatch } from 'redux-thunk'
+import { useEffect, useState } from 'react'
 import { EyeInvisibleOutlined } from "@ant-design/icons"
+import { GetAllCategory } from '../../../../api/categories'
+import useFetchData from '../../../../hooks/useFetchData'
 const ListProductByCategories = () => {
-    const dispatch: ThunkDispatch<RootState, void, any> = useDispatch();
-    const categories = useSelector((state: RootState) => state.categories.categories);
-    useEffect(() => {
-        dispatch(fetchCategories());
-    }, []);
+    const { data: categories } = useFetchData("/categories");
     return (
         <section>
-            {categories && categories.map((item: ICategory) => {
+            {categories.map((item: ICategory) => {
                 return (
                     <div key={item._id} className="container mx-auto">
                         <div className="title">

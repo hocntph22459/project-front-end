@@ -12,22 +12,29 @@ import { ICategory } from '../../../../types/category';
 import { IProduct } from '../../../../types/product';
 import { CreateProduct, GetAllProduct, GetOneProduct, UpdateProduct } from '../../../../api/product';
 import IhashTag from '../../../../types/hashtag';
+import { GetAllCategory } from '../../../../api/categories';
+import { GetAllHashtag } from '../../../../api/hashtags';
 
-type Props = {
-  categories: ICategory[],
-  hashtags: IhashTag[]
-};
 
 type Size = {
   size: string,
   quantity: number,
 };
 
-const ManagementProductUpdate = (props: Props) => {
-  const { id }: any = useParams()
+const ManagementProductUpdate = () => {
+  const { id }: string | any = useParams()
+  const navigate = useNavigate();
   const [product, setproduct] = useState<IProduct>();
   useEffect(() => {
     GetOneProduct(id).then(({ data }) => setproduct(data))
+  }, []);
+  const [categories, setcategories] = useState<ICategory[]>([]);
+  useEffect(() => {
+    GetAllCategory().then(({ data }) => setcategories(data))
+  }, []);
+  const [hashtags, sethashtags] = useState<IhashTag[]>([]);
+  useEffect(() => {
+    GetAllHashtag().then(({ data }) => sethashtags(data))
   }, []);
   console.log(product)
   const [open, setOpen] = useState(false);
@@ -37,7 +44,6 @@ const ManagementProductUpdate = (props: Props) => {
   const onDrop = (acceptedFiles: any) => {
     setFiles((prev: any) => [...prev, ...acceptedFiles]);
   };
-  const navigate = useNavigate();
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const handleAddSize = () => {
@@ -113,107 +119,73 @@ const ManagementProductUpdate = (props: Props) => {
   console.log(initial) //sizes là 1 mảng chứa {size,quantity}
   return (
     <Form
-      initialValues={initial}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 14 }}
-      layout="horizontal"
-      onFinish={onFinish}
-    >
-      <Form.Item hidden
-        label="_id"
-        name="_id"
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item name="name" label="Name" rules={[{ message: 'Please enter name!', required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="price" label="Price" rules={[{ message: 'Please enter price!', required: true }]}>
-        <Input type='number' />
-      </Form.Item>
-      <Form.Item label="Image">
-        <div className="mb-6">
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <UploadOutlined />
-            <p>Drag 'n' drop some files here, or click to select files</p>
-          </div>
-        </div>
-        {files.length > 0 ? (
-          <div className="mb-6">
-            {files.map((file: any) => (
-              <div key={file.name}>
-                <p>{file.name}</p>
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+          onFinish={onFinish}
+          initialValues={initial}
+        >
+          <Form.Item name="name" label="Name" rules={[{ message: 'Please enter name!', required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="price" label="Price" rules={[{ message: 'Please enter price!', required: true }]}>
+            <Input type='number' />
+          </Form.Item>
+          <Form.Item name="salePrice" label="salePrice">
+            <Input type='number' />
+          </Form.Item>
+          <Form.Item label="Image">
+            <div className="mb-6">
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <UploadOutlined />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              </div>
+            </div>
+          </Form.Item>
+          <Form.Item name="description" label="Description" rules={[{ message: 'Please enter description!', required: true }]}>
+            <Input.TextArea rows={8} />
+          </Form.Item>
+          <Form.Item label="Hashtag" name="tags" rules={[{ message: 'Please enter hashtags!', required: true }]}>
+            <Select
+              className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              options={hashtags.map((list: IhashTag) => ({
+                label: list.name,
+                value: list._id,
+              }))}
+            />
+          </Form.Item>
+          <Form.Item label="Category" name="CategoryId" rules={[{ message: 'Please enter Categories!', required: true }]}>
+            <Select
+              className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              options={categories.map((list: ICategory) => ({
+                label: list.name,
+                value: list._id,
+              }))}
+            />
+          </Form.Item>
+          <Form.Item label="Sizes" rules={[{ message: 'Please enter sizes!', required: true }]}>
+            {product.sizes.map((size, index) => (
+              <div className="flex space-x-4 mb-4 mt-8" key={index}>
+                <div>
+                  <label htmlFor="">size</label>
+                  <Input placeholder="Size" type='number' value={size.size} onChange={(e) => handleSizeChange(index, 'size', parseInt(e.target.value))} />
+                </div>
+                <div>
+                  <label htmlFor="">quantity</label>
+                  <Input placeholder="Quantity" type="number" value={size.quantity} onChange={(e) => handleSizeChange(index, 'quantity', parseInt(e.target.value))} />
+                </div>
+                <Button type="primary" danger onClick={() => handleRemoveSize(index)}>Remove</Button>
               </div>
             ))}
-          </div>
-        ) : (
-          <div className="mb-6">
-
-            <Image.PreviewGroup
-            >
-              {initial.images.map((image: string, index: number) => (
-                <Image style={{ width: 50, height: 50 }} src={image} alt="" key={index} />
-              ))}
-            </Image.PreviewGroup>
-          </div>
-        )}
-      </Form.Item>
-      <Form.Item name="description" label="Description" rules={[{ message: 'Please enter description!', required: true }]}>
-        <Input.TextArea rows={8} />
-      </Form.Item>
-      <Form.Item
-        label="Hashtag"
-        name="tags"
-        rules={[{ message: 'Please enter hashtags!', required: true }]}
-      >
-        <Select
-          className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          options={props.hashtags.map((list) => ({
-            label: list.name,
-            value: list._id,
-            defaultValue: initial.tags.includes(list._id) ? list._id : null,
-          }))}
-        />
-      </Form.Item>
-
-      <Form.Item
-        label="Categories"
-        name="CategoryId"
-        rules={[{ message: 'Please enter Categories!', required: true }]}
-      >
-        <Select
-          className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          options={props.categories.map((list) => ({
-            label: list.name,
-            value: list._id,
-            defaultValue: initial.CategoryId.includes(list._id) ? list._id : null,
-          }))}
-        />
-      </Form.Item>
-
-      <Form.Item label="Sizes" rules={[{ message: 'Please enter sizes!', required: true }]}>
-        {sizes.map((size, index) => (
-          <div className="flex space-x-4 mb-4 mt-8" key={index}>
-            <div>
-              <label htmlFor="">size</label>
-              <Input placeholder="Size" type='number' value={size.size} onChange={(e) => handleSizeChange(index, 'size', parseInt(e.target.value))} />
-            </div>
-            <div>
-              <label htmlFor="">quantity</label>
-              <Input placeholder="Quantity" type="number" value={size.quantity} onChange={(e) => handleSizeChange(index, 'quantity', parseInt(e.target.value))} />
-            </div>
-            <Button type="primary" danger onClick={() => handleRemoveSize(index)}>Remove</Button>
-          </div>
-        ))}
-        <Button type="dashed" onClick={handleAddSize}>Add Size</Button>
-      </Form.Item>
-      <Form.Item>
-        <Button style={{ marginLeft: 165 }} type="primary" className="bg-blue-500" htmlType="submit">
-          Update
-        </Button>
-      </Form.Item>
-    </Form>
+            <Button type="dashed" onClick={handleAddSize}>Add Size</Button>
+          </Form.Item>
+          <Form.Item>
+            <Button style={{ marginLeft: 165 }} type="primary" className="bg-blue-500" htmlType="submit">
+              Create
+            </Button>
+          </Form.Item>
+        </Form>
   );
 };
 

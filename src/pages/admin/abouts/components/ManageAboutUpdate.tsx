@@ -19,7 +19,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 const ManageAboutUpdate = () => {
-  const { id }: any = useParams()
+  const { id }: string | any = useParams()
   const [about, setabout] = useState<IAbout>();
   useEffect(() => {
     GetOneAbout(id).then(({ data }) => setabout(data))

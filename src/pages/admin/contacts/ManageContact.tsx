@@ -38,38 +38,6 @@ const ManageContact = () => {
     }
   }
 
-  const HandleRemoveBill = async (id: string) => {
-    try {
-      Modal.confirm({
-        title: 'Confirm',
-        content: 'Are you sure you want to delete this about?',
-        okText: 'Yes',
-        cancelText: 'No',
-        okButtonProps: {
-          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
-        },
-        onOk: async () => {
-          const loading = message.loading({ content: 'Loading...', duration: 0 });
-          setTimeout(async () => {
-            if (loading) {
-              loading();
-            }
-            const response = await RemoveContact(id);
-            if (response) {
-              message.success('Deleted successfully!', 3);
-              const dataNew = contacts.filter((data) => data._id !== id);
-              setcontacts(dataNew);
-            }
-          }, 2000);
-        },
-        onCancel: () => {
-          message.success('Canceled!');
-        },
-      });
-    } catch (error) {
-      message.error('Delete failed!', 5);
-    }
-  };
   const columns = [
     {
       title: 'stt',

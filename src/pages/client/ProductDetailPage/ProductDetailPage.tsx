@@ -5,7 +5,7 @@ import ListRelatedProduct from './components/ListRelatedProduct'
 import ListProductDetail from './components/ListProductDetail'
 import { IProductDetail } from '../../../types/product'
 const ProductDetailPage = () => {
-  const { id }: any = useParams()
+  const { id }: string | any = useParams()
   const [product, setproduct] = useState<IProductDetail>()
   useEffect(() => {
     GetOneProduct(id)

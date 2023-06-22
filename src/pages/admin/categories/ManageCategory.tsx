@@ -1,5 +1,5 @@
 import { Table, Empty, message, Modal } from 'antd';
-import { DeleteOutlined,EditOutlined } from "@ant-design/icons"
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { ICategory } from '../../../types/category';
 import { GetAllCategory, RemoveCategory } from '../../../api/categories';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,9 @@ const ManageCategory = () => {
   useEffect(() => {
     GetAllCategory().then(({ data }) => setcategories(data))
   }, [])
+  const handleCategoryCreated = (newCategory: ICategory) => {
+    setcategories([...categories, newCategory]);
+  };
   const HandleRemoveCategory = async (id: string) => {
     try {
       Modal.confirm({
@@ -75,7 +78,7 @@ const ManageCategory = () => {
     },
   ];
 
-  const data = categories.map((item:ICategory,index:number) => {
+  const data = categories.map((item: ICategory, index: number) => {
     return {
       index: index,
       key: item._id,
@@ -90,7 +93,7 @@ const ManageCategory = () => {
     )
   return (
     <>
-    <ManageCategoryAdd/>
+      <ManageCategoryAdd onCategoryCreated={handleCategoryCreated} />
       <Table
         columns={columns}
         dataSource={data}

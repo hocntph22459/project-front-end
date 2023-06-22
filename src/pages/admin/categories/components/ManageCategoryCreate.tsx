@@ -1,11 +1,14 @@
 import { Button, Col, Form, Input, Modal, Row, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import { ICategory } from '../../../../types/category';
 import { CreateCategory } from '../../../../api/categories';
 import { useState } from 'react';
 import { PlusOutlined } from "@ant-design/icons"
 
-const ManageCategoryCreate = () => {
+type Props = {
+  onCategoryCreated: (category: ICategory) => void
+}
+
+const ManageCategoryCreate = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -18,19 +21,17 @@ const ManageCategoryCreate = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const navigate = useNavigate()
   const [form] = Form.useForm();
   const onFinish = async (values: ICategory) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
-        const response = await CreateCategory(values);
+        const response:any = await CreateCategory(values);
         if (response)
           setIsModalOpen(false);
         message.success('successfully Create categories', 3);
-        navigate('/admin/categories')
-        // GetAllCategory().then(({ data }) => setcategories(data));
+        props.onCategoryCreated(response);
       }
     } catch (error) {
       message.error('Failed Create categories', 5);

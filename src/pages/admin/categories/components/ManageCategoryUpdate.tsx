@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
 import { ICategory } from '../../../../types/category';
-import { UpdateCategory } from '../../../../api/categories';
-type Props = {
-  categories: ICategory[],
-}
-const ManageCategoryUpdate = (props: Props) => {
+import { GetOneCategory, UpdateCategory } from '../../../../api/categories';
+
+const ManageCategoryUpdate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id }:string | any = useParams();
   const onFinish = async (values: ICategory) => {
     const key = 'loading';
     try {
@@ -24,15 +22,14 @@ const ManageCategoryUpdate = (props: Props) => {
         message.error('Failed to update categories', 5);
     }
   };
-  const [categories, setcategories] = useState<ICategory>();
+  const [categorie, setcategorie] = useState<ICategory>();
   useEffect(() => {
-    const response = props.categories.find((item: any) => item._id == id);
-    setcategories(response);
-  }, [props]);
-  if (!categories) return null;
+    GetOneCategory(id).then(({ data }) => setcategorie(data));
+  }, []);
+  if (!categorie) return null;
   const initial = {
-    _id: categories._id,
-    name: categories.name,
+    _id: categorie._id,
+    name: categorie.name,
   };
   return (
     <Form layout="vertical" autoComplete="off" onFinish={onFinish} initialValues={initial}>

@@ -12,22 +12,20 @@ import { ICategory } from '../../../../types/category';
 import { IProduct } from '../../../../types/product';
 import { CreateProduct, GetAllProduct } from '../../../../api/product';
 import IhashTag from '../../../../types/hashtag';
-
-type Props = {
-  categories: ICategory[],
-  hashtags: IhashTag[],
-};
+import useFetchData from '../../../../hooks/useFetchData';
 
 type Size = {
   size: string,
   quantity: number,
 };
 
-const ManagementProductCreate = (props: Props) => {
+const ManagementProductCreate = () => {
+  const { data: categories } = useFetchData(`/categories`);
+  const { data: hashtags } = useFetchData(`/hashtags`);
+
   const [open, setOpen] = useState(false);
   const [files, setFiles]: any = useState([]);
   const [sizes, setSizes] = useState<Size[]>([{ size: '', quantity: 0 }]);
-
   const onDrop = (acceptedFiles: any) => {
     setFiles((prev: any) => [...prev, ...acceptedFiles]);
   };
@@ -137,7 +135,7 @@ const ManagementProductCreate = (props: Props) => {
           <Form.Item label="Hashtag" name="tags" rules={[{ message: 'Please enter hashtags!', required: true }]}>
             <Select
               className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              options={props.hashtags.map((list) => ({
+              options={hashtags.map((list: IhashTag) => ({
                 label: list.name,
                 value: list._id,
               }))}
@@ -146,7 +144,7 @@ const ManagementProductCreate = (props: Props) => {
           <Form.Item label="Category" name="CategoryId" rules={[{ message: 'Please enter Categories!', required: true }]}>
             <Select
               className="bg-gray-50 border mb-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              options={props.categories.map((list) => ({
+              options={categories.map((list: ICategory) => ({
                 label: list.name,
                 value: list._id,
               }))}

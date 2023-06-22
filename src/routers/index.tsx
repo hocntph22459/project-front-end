@@ -27,41 +27,14 @@ import ManageBill from "../pages/admin/bills/ManageBill";
 import ManageBillUpdate from "../pages/admin/bills/components/ManageBillUpdate";
 import ManageAbout from "../pages/admin/abouts/ManageAbout";
 import ManageAboutUpdate from "../pages/admin/abouts/components/ManageAboutUpdate";
-
-import { ICategory } from "../types/category";
-import { IProduct } from "../types/product";
-import IhashTag from "../types/hashtag";
-import { GetAllHashtag } from "../api/hashtags";
-import { GetAllProduct } from "../api/product";
-import { GetAllCategory } from "../api/categories";
 const Router = () => {
-    // State product
-    const [products, setproducts] = useState<IProduct[]>([])
-    useEffect(() => {
-        GetAllProduct().then(({ data }) => setproducts(data))
-    }, [])
-
-    // State categories
-    const [categories, setcategories] = useState<ICategory[]>([])
-    useEffect(() => {
-        GetAllCategory()
-            .then(({ data }) => setcategories(data))
-    }, [])
-
-    // State hashtags
-    const [hashtags, sethashtags] = useState<IhashTag[]>([])
-    useEffect(() => {
-        GetAllHashtag()
-            .then(({ data }) => sethashtags(data))
-    }, [])
-
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='' element={<LayoutClient />}>
                     <Route index element={<Homepage />} />
                     <Route path='products'>
-                        <Route index element={<ProductPage categories={categories} />} />
+                        <Route index element={<ProductPage />} />
                         <Route path=':id' element={<ProductDetailPage />} />
                     </Route>
                     <Route path='products/sales'>
@@ -78,16 +51,16 @@ const Router = () => {
                 <Route path='admin' element={<LayoutAdmin />}>
                     <Route index element={<Management />} />
                     <Route path='products'>
-                        <Route index element={<ManagementProduct products={products} categories={categories} hashtags={hashtags} />} />
-                        <Route path=':id/update' element={<ManagementProductUpdate hashtags={hashtags} categories={categories} />} />
+                        <Route index element={<ManagementProduct />} />
+                        <Route path=':id/update' element={<ManagementProductUpdate />} />
                     </Route>
                     <Route path='categories'>
                         <Route index element={<ManageCategory />} />
-                        <Route path=':id/update' element={<ManageCategoryUpdate categories={categories} />} />
+                        <Route path=':id/update' element={<ManageCategoryUpdate />} />
                     </Route>
                     <Route path='hashtags'>
                         <Route index element={<ManageHashtag />} />
-                        <Route path=':id/update' element={<ManageHashtagUpdate hashtags={hashtags} />} />
+                        <Route path=':id/update' element={<ManageHashtagUpdate />} />
                     </Route>
                     <Route path='abouts'>
                         <Route index element={<ManageAbout />} />

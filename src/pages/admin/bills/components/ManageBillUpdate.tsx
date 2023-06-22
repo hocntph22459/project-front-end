@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ManageBillUpdate = (props: Props) => {
-  const { id }: any = useParams()
+  const { id }: string | any = useParams()
   const [orders, setorders] = useState<IBill>();
   useEffect(() => {
     GetOneBill(id)

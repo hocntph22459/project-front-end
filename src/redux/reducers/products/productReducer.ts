@@ -11,7 +11,7 @@ import { FETCH_PRODUCTS_SUCCESS } from "../../contants/products/products.type";
       case FETCH_PRODUCTS_SUCCESS:
         return {
           ...state,
-          loading: false,
+          loading: true,
           products: action.payload,
         };
       default:

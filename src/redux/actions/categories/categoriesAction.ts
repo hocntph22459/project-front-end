@@ -3,16 +3,16 @@ import { ICategory } from "../../../types/category";
 import { FETCH_CATEGORIES_FAILED, FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_SUCCESS } from "../../contants/categories/categories.type";
 
 
-export const fetchCategoriesRequest = () => ({
+export const FetchCategoriesRequest = () => ({
     type: FETCH_CATEGORIES_REQUEST,
 });
 
-export const fetchCategoriesSuccess = (categories: ICategory[]) => ({
+export const FetchCategoriesSuccess = (categories: ICategory[]) => ({
     type: FETCH_CATEGORIES_SUCCESS,
     payload: categories,
 });
 
-export const fetchCategoriesFailure = (error: any) => ({
+export const FetchCategoriesFailure = (error: any) => ({
     type: FETCH_CATEGORIES_FAILED,
     payload: error,
 });
@@ -20,7 +20,7 @@ export const fetchCategoriesFailure = (error: any) => ({
 export const fetchCategories = () => async (dispatch:any) => {
     try {
         const { data } = await GetAllCategory();
-        dispatch(fetchCategoriesSuccess(data));
+        dispatch(FetchCategoriesSuccess(data));
     } catch (error: any) {
         console.log(error)
     }
