@@ -119,6 +119,7 @@ const ManageBill = () => {
       status: item.status
     }
   })
+  console.log(listData)
   if (listData.length == 0)
     return (
       <Empty description={false} />

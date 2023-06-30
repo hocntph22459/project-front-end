@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom'
-import { IProduct } from '../../../../types/product'
-
+import { IProduct } from '../types/product'
 type Props = {
     ProductSale: IProduct[]
 }
-
 const ListProductSale = (props: Props) => {
     return (
         <div>

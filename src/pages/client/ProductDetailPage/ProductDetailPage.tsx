@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GetOneProduct } from '../../../api/product'
-import ListRelatedProduct from './components/ListRelatedProduct'
-import ListProductDetail from './components/ListProductDetail'
+
 import { IProductDetail } from '../../../types/product'
+import ListProductDetail from '../../../components/ListProductDetail'
+import ListRelatedProduct from '../../../components/ListRelatedProduct'
 const ProductDetailPage = () => {
   const { id }: string | any = useParams()
   const [product, setproduct] = useState<IProductDetail>()
@@ -19,5 +20,4 @@ const ProductDetailPage = () => {
     </section>
   )
 }
-
 export default ProductDetailPage

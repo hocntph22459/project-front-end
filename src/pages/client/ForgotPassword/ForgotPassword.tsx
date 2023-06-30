@@ -92,7 +92,7 @@ const ForgotPassword = () => {
                     </MyFormItem>
                     <Button
                         htmlType="submit"
-                        className="w-full h-[52px] text-center py-3 rounded bg-[black] text-white hover:bg-green-dark focus:outline-none my-1"
+                        className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
                     >
                         Forgot password
                     </Button>

@@ -3,7 +3,7 @@ import { GetBillByUser } from '../../../api/bill'
 import EmptyCart from '../../../components/EmptyCart';
 import IBill from '../../../types/bill';
 import { Link } from 'react-router-dom';
-import ListBill from './components/ListBill';
+import ListBill from '../../../components/ListBill';
 import IUser from '../../../types/user';
 
 const OrderPage = () => {

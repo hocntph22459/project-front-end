@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../../redux/actions/cart/cartActions';
 import EmptyCart from '../../../components/EmptyCart';
 import { Link } from 'react-router-dom';
-import CheckoutCart from './components/CheckoutCart';
+import CheckoutCart from '../../../components/CheckoutCart';
 function CartPage() {
     const dispatch = useDispatch<any>();
     const handleRemove = (id: string) => {

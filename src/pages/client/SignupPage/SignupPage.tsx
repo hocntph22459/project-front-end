@@ -1,21 +1,11 @@
-import { createContext, useContext, useRef, useState } from 'react';
-import { Button, Form, FormItemProps, Input, Modal } from 'antd';
+import { useRef, useState } from 'react';
+import { Button, Form, Input, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import { Signup } from '../../../api/auth';
 import IUser from '../../../types/user';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-const MyFormItemContext = createContext<(string | number)[]>([]);
-
-function toArr(str: string | number | (string | number)[]): (string | number)[] {
-    return Array.isArray(str) ? str : [str];
-}
-const MyFormItem = ({ name, ...props }: FormItemProps) => {
-    const prefixPath = useContext(MyFormItemContext);
-    const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-    return <Form.Item name={concatName} {...props} />;
-};
 const SignupPage = () => {
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -71,19 +61,20 @@ const SignupPage = () => {
                     <p tabIndex={0} role="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800 mb-8">
                         signup to your account
                     </p>
-                    <MyFormItem className='text-black font-bold'
+                    <Form.Item className='text-black font-bold'
                         rules={[
                             {
                                 message: 'vui lòng nhập name!',
                                 required: true,
+                                min: 3
                             },
                         ]}
                         name="name"
                         label="name"
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập name" />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         name="email"
                         label="Email"
                         rules={[
@@ -95,14 +86,15 @@ const SignupPage = () => {
                         ]}
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập email" />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         name="password"
                         label="mật khẩu"
                         rules={[
                             {
                                 message: 'vui lòng nhập password!',
                                 required: true,
+                                min: 6
                             },
                         ]}
                     >
@@ -110,23 +102,24 @@ const SignupPage = () => {
                             type='password' className='font-mono border border-indigo-600 h-10' placeholder="nhập password"
                             iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         name="confirmpassword"
                         label="nhập lại mật khẩu"
                         rules={[
                             {
                                 message: 'vui lòng nhập confirm password!',
                                 required: true,
+                                min: 6
                             },
                         ]}
                     >
                         <Input.Password
-                            type='password' className='font-mono h-10 border border-indigo-600' placeholder="nhập lại password"
+                            type='password' className='font-mono border border-indigo-600 h-10' placeholder="nhập password"
                             iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         />
-                    </MyFormItem>
-                    <MyFormItem>
+                    </Form.Item>
+                    <Form.Item>
                         <ReCAPTCHA className=''
                             ref={recaptchaRef}
                             sitekey="6Ld_Ek8mAAAAAKtnDYdUCNiClx9m52L_aafio6we"
@@ -137,7 +130,7 @@ const SignupPage = () => {
                         ) : (
                             <p className='text-[red]'>Vui lòng xác thực bằng Recaptcha trước khi tiếp tục.</p>
                         )}
-                    </MyFormItem>
+                    </Form.Item>
                     <Button
                         htmlType="submit"
                         className="w-full h-[52px] text-center py-3 rounded bg-[#4a71c4] text-white hover:bg-green-dark focus:outline-none my-1"
@@ -150,5 +143,4 @@ const SignupPage = () => {
 
     );
 };
-
 export default SignupPage;

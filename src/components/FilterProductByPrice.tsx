@@ -1,14 +1,13 @@
-import { IProduct } from '../../../../types/product'
 import { Link } from 'react-router-dom'
+import { IProduct } from '../types/product'
 import { EyeInvisibleOutlined } from "@ant-design/icons"
-
 type Props = {
-    products: IProduct[]
+    productsByPrice: IProduct[]
 }
-const FindProduct = (props: Props) => {
+const FilterProductByPrice = (props: Props) => {
     return (
         <div className="flex flex-wrap items-center ">
-            {props.products.map((product) => (
+            {props.productsByPrice.map((product) => (
                 <div key={product._id} className="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
                     <Link to={`/products/${product._id}`}>
                         <div className="bg-white p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
@@ -26,7 +25,7 @@ const FindProduct = (props: Props) => {
                             </div>
                             <div className="p-5 bg-gray-50 dark:bg-gray-900">
                                 <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-xl font-medium dark:text-gray-400">
+                                    <h3 className="text-xl font-medium dark:text-gray-400 truncate">
                                         {product.name}
                                     </h3>
 
@@ -60,5 +59,4 @@ const FindProduct = (props: Props) => {
         </div>
     )
 }
-
-export default FindProduct
+export default FilterProductByPrice

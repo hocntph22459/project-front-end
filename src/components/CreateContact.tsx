@@ -2,8 +2,8 @@ import { Button, Form, FormItemProps, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import { createContext, useContext } from 'react';
-import { CreateContact } from '../../../../api/contact';
-import IContact from '../../../../types/contact';
+import { CreateContact } from '../api/contact';
+import IContact from '../types/contact';
 const MyFormItemContext = createContext<(string | number)[]>([]);
 function toArr(str: string | number | (string | number)[]): (string | number)[] {
     return Array.isArray(str) ? str : [str];

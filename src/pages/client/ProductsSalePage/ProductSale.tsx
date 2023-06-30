@@ -1,6 +1,5 @@
-import ListProductSale from './components/ListProductSale'
+import ListProductSale from '../../../components/ListProductSale';
 import useFetchData from '../../../hooks/useFetchData'
-
 const ProductSale = () => {
   const { data } = useFetchData("/products/sale");
   return (

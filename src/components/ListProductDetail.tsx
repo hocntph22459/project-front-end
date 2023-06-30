@@ -1,10 +1,9 @@
 import { Carousel, Form, FormItemProps, Image, Input, Select, message } from 'antd'
 import { Link } from 'react-router-dom'
-import { IProductDetail } from '../../../../types/product';
 import { useDispatch } from 'react-redux';
-import { IProduct } from '../../../../types/product'
-import { addToCart } from '../../../../redux/actions/cart/cartActions';
 import { createContext, useContext } from 'react';
+import { IProduct, IProductDetail } from '../types/product';
+import { addToCart } from '../redux/actions/cart/cartActions';
 type Props = {
     product: IProductDetail
 }
@@ -142,7 +141,6 @@ const ListProductDetail = (props: Props) => {
                 </div>
             </div>
         </section>
-
     )
 }
 export default ListProductDetail

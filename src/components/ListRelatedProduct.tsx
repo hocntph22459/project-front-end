@@ -1,5 +1,6 @@
-import { IProductDetail } from "../../../../types/product";
-import ModalAddtocart from "../../../../components/ModalAddtocart";
+import { IProductDetail } from "../types/product";
+import ModalAddtocart from "./ModalAddtocart";
+
 type Props = {
     product: IProductDetail
 }
@@ -14,7 +15,7 @@ const ListRelatedProduct = (props: Props) => {
                     return (
                         <div className="products-item" key={item._id}>
                             <div className="bg-white p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-                                <a  href={`/products/` + item._id}></a>
+                                <a href={`/products/` + item._id}></a>
                                 <div>
                                     <img className="w-full" src={item.images[0]} alt="" />
                                 </div>
@@ -31,5 +32,4 @@ const ListRelatedProduct = (props: Props) => {
         </section>
     )
 }
-
 export default ListRelatedProduct

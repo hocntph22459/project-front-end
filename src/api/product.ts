@@ -6,7 +6,7 @@ export const GetAllProduct = () => {
 export const GetProductSale = () => {
     return intansce.get('/products/sale')
 }
-export const SearchProduct = (name: string) => {
+export const SearchProductByName = (name: string) => {
     return intansce.get('/products/search?name=' + name)
 }
 export const FindProductByPrice = (min:number,max:number) => {

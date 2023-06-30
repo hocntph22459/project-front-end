@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ICategory } from '../../../../types/category'
-
+import { ICategory } from '../types/category'
 type Props = {
     categories: ICategory[],
 }

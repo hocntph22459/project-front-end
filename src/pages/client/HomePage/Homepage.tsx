@@ -1,20 +1,19 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Input, message } from 'antd';
 import { useState } from 'react';
-import { FindProductByPrice, SearchProduct } from '../../../api/product';
-import ListProductByCategories from './components/ListProductByCategories';
+import { FindProductByPrice, SearchProductByName } from '../../../api/product';
 import { IProduct } from '../../../types/product';
-import FindProduct from './components/FindProduct';
-import FilterProductByPrice from './components/FilterProductByPrice';
+import FilterProductByPrice from '../../../components/FilterProductByPrice';
 import { Link } from 'react-router-dom';
-
+import ListProductByCategories from '../../../components/ListProductByCategories';
+import SearchProduct from '../../../components/SearchProduct';
 const Homepage = () => {
   const [query, setQuery] = useState<any>();
   const [products, setProducts] = useState<IProduct[]>([]);
   const handleSearch = async (value: string) => {
     try {
       setQuery(value);
-      const response = await SearchProduct(value)
+      const response = await SearchProductByName(value)
       message.success('successfully product search')
       setProducts(response.data);
     } catch (error: any) {
@@ -89,7 +88,7 @@ const Homepage = () => {
               <ListProductByCategories />
             )}
             {!query ? (
-              <FindProduct products={products} />
+              <SearchProduct products={products} />
             ) : (
               <ListProductByCategories />
             )}

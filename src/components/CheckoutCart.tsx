@@ -2,10 +2,10 @@ import { Form, FormItemProps, Input, message } from 'antd';
 import { createContext, useContext, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useSelector } from 'react-redux';
-import { CreateBill } from '../../../../api/bill';
+import { CreateBill } from '../api/bill';
 import { useNavigate } from 'react-router-dom';
-import SigninPage from '../../SigninPage';
-import IBill from '../../../../types/bill';
+import SigninPage from '../pages/client/SigninPage';
+import IBill from '../types/bill';
 const MyFormItemContext = createContext<(string | number)[]>([]);
 function toArr(str: string | number | (string | number)[]): (string | number)[] {
     return Array.isArray(str) ? str : [str];

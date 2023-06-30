@@ -1,6 +1,6 @@
 import { Spin } from "antd";
-import useFetchData from "../../../../hooks/useFetchData";
-import IAbout from "../../../../types/about";
+import useFetchData from "../hooks/useFetchData";
+import IAbout from "../types/about";
 
 const ListAbout = () => {
     const { data, loading, error } = useFetchData("/abouts");

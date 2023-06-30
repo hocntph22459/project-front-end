@@ -1,17 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useEffect, useState } from "react";
 import LayoutClient from "../layouts/client";
 import Homepage from "../pages/client/HomePage";
 import ProductPage from "../pages/client/ProductsPage";
 import ProductDetailPage from "../pages/client/ProductDetailPage";
+import ProductSale from "../pages/client/ProductsSalePage";
 import NotFoundPage from "../pages/client/404";
 import SignupPage from "../pages/client/SignupPage";
 import SigninPage from "../pages/client/SigninPage";
 import ContactPage from "../pages/client/ContactPage";
 import { CartPage } from "../pages/client/Cart";
-import ProductSale from "../pages/client/ProductsSalePage";
 import OrderPage from "../pages/client/Bill";
-
 import LayoutAdmin from "../layouts/admin";
 import ManagementProduct from "../pages/admin/products/ManageProduct";
 import ManagementProductUpdate from "../pages/admin/products/components/ManageProductUpdate";
@@ -64,7 +62,7 @@ const Router = () => {
                     </Route>
                     <Route path='abouts'>
                         <Route index element={<ManageAbout />} />
-                        <Route path=':id/update' element={<ManageAboutUpdate/>} />
+                        <Route path=':id/update' element={<ManageAboutUpdate />} />
                     </Route>
                     <Route path='order/bill'>
                         <Route index element={<ManageBill />} />

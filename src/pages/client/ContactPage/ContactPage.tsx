@@ -1,5 +1,5 @@
-import FormCreateContact from "./components/CreateContact"
-import ListAbout from "./components/ListAbout"
+import FormCreateContact from "../../../components/CreateContact"
+import ListAbout from "../../../components/ListAbout"
 
 const ContactPage = () => {
     return (

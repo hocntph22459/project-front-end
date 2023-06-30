@@ -1,9 +1,7 @@
-import ListCategories from './components/ListCategories'
-import ListProducts from './components/ListProducts'
-import { ICategory } from '../../../types/category'
 import { useLocation } from "react-router-dom";
 import useFetchData from '../../../hooks/useFetchData';
-
+import ListCategories from "../../../components/ListCategories";
+import ListProducts from "../../../components/ListProducts";
 const ProductPage = () => {
   const { data: categories } = useFetchData("/categories");
   const location = useLocation();
@@ -22,5 +20,4 @@ const ProductPage = () => {
     </section>
   )
 }
-
 export default ProductPage;

@@ -1,9 +1,7 @@
-import { ICategory } from '../../../../types/category'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { EyeInvisibleOutlined } from "@ant-design/icons"
-import { GetAllCategory } from '../../../../api/categories'
-import useFetchData from '../../../../hooks/useFetchData'
+import useFetchData from '../hooks/useFetchData';
+import { ICategory } from '../types/category';
 const ListProductByCategories = () => {
     const { data: categories } = useFetchData("/categories");
     return (
@@ -33,7 +31,7 @@ const ListProductByCategories = () => {
                                             </div>
                                             <div className="p-5 bg-gray-50 dark:bg-gray-900">
                                                 <div className="flex items-center justify-between mb-4">
-                                                    <h3 className="text-xl font-medium dark:text-gray-400">
+                                                    <h3 className="text-xl font-medium dark:text-gray-400 truncate">
                                                         {product.name}
                                                     </h3>
 
@@ -71,5 +69,4 @@ const ListProductByCategories = () => {
         </section>
     )
 }
-
 export default ListProductByCategories

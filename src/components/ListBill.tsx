@@ -1,6 +1,6 @@
-import IBill from "../../../../types/bill";
-import ListItemsOrder from "../../../../components/ListItemsOrder";
-import { RemoveBill } from "../../../../api/bill";
+import IBill from "../types/bill";
+import ListItemsOrder from "./ListItemsOrder";
+import { RemoveBill } from "../api/bill";
 import { Modal, message } from "antd";
 import { useNavigate } from "react-router-dom";
 

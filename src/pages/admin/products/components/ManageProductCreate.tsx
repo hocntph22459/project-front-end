@@ -152,7 +152,7 @@ const ManagementProductCreate = () => {
           </Form.Item>
           <Form.Item label="Sizes" rules={[{ message: 'Please enter sizes!', required: true }]}>
             {sizes.map((size, index) => (
-              <div className="flex space-x-4 mb-4 mt-8" key={index}>
+              <div className="flex space-x-4 mb-4" key={index}>
                 <div>
                   <label htmlFor="">size</label>
                   <Input placeholder="Size" type='number' value={size.size} onChange={(e) => handleSizeChange(index, 'size', parseInt(e.target.value))} />
@@ -161,7 +161,7 @@ const ManagementProductCreate = () => {
                   <label htmlFor="">quantity</label>
                   <Input placeholder="Quantity" type="number" value={size.quantity} onChange={(e) => handleSizeChange(index, 'quantity', parseInt(e.target.value))} />
                 </div>
-                <Button type="primary" danger onClick={() => handleRemoveSize(index)}>Remove</Button>
+                <Button className='mt-6' type="primary" danger onClick={() => handleRemoveSize(index)}>Remove</Button>
               </div>
             ))}
             <Button type="dashed" onClick={handleAddSize}>Add Size</Button>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Pagination, Spin } from 'antd';
-import ModalAddtocart from '../../../../components/ModalAddtocart';
-import { IProduct } from '../../../../types/product';
+import { Pagination } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { IProduct } from '../types/product';
+import ModalAddtocart from './ModalAddtocart';
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 type Props = {
   products: IProduct[],
