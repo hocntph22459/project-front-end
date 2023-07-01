@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, } from 'antd';
-import { ICategory } from '../../../../types/category';
-import { IProduct } from '../../../../types/product';
-import { CreateProduct, GetAllProduct } from '../../../../api/product';
-import IhashTag from '../../../../types/hashtag';
-import useFetchData from '../../../../hooks/useFetchData';
+import { ICategory } from '../../../types/category';
+import { IProduct } from '../../../types/product';
+import { CreateProduct, GetAllProduct } from '../../../api/product';
+import IhashTag from '../../../types/hashtag';
+import useFetchData from '../../../hooks/useFetchData';
 
 type Size = {
   size: string,
@@ -86,8 +86,8 @@ const ManagementProductCreate = () => {
         console.error(error);
       }
     }
-    catch (error) {
-      message.error('Failed to create product');
+    catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
   };
 

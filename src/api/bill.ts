@@ -19,7 +19,11 @@ export const CreateBill = (data: IBill) => {
 }
 
 export const UpdateBill = (data: IBill) => {
-    return intansce.put(`/bill/${data._id}`, data);
+    return intansce.put(`/bill/${data._id}`, data, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+    });
 }
 
 export const RemoveBill = (_id: string) => {

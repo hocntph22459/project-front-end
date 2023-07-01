@@ -3,43 +3,32 @@ import {
   Button, Form, Input, Select, message,
 } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
-import IBill from '../../../../types/bill';
-import { GetOneBill } from '../../../../api/bill';
-type Props = {
-
-};
-
-const ManageBillUpdate = (props: Props) => {
+import IBill from '../../../types/bill';
+import { GetOneBill, UpdateBill } from '../../../api/bill';
+const ManageBillUpdate = () => {
   const { id }: string | any = useParams()
   const [orders, setorders] = useState<IBill>();
+  const navigate = useNavigate();
   useEffect(() => {
     GetOneBill(id)
       .then(({ data }) => setorders(data))
-  }, [props]);
-  // console.log(orders)
-  const navigate = useNavigate();
-
-
+  }, []);
   const onFinish = async (values: IBill) => {
-    // try {
-    //   const key = 'loading';
-    //   const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-    //   if (loading) {
-    //     const response = await Updateorders(values);
-    //     if (response)
-    //       message.success(response.data.message, 3);
-    //   }
+    try {
+      const key = 'loading';
+      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
+      if (loading) {
+        const response = await UpdateBill(values);
+        if (response)
+          message.success(response.data.message, 3);
+      }
 
-    //   navigate('/admin/orders');
-    // } catch (error: any) {
-    //   message.error(error.message || 'lỗi khi thêm bài viết!');
-    // }
-    console.log(values)
+      navigate('admin/order/bill');
+    } catch (error: any) {
+      message.error(error.response.data.message,5);
+    }
   };
-
-
   if (!orders) return null;
-
   const initial = {
     _id: orders._id,
     name: orders.name,
@@ -86,7 +75,7 @@ const ManageBillUpdate = (props: Props) => {
             options={[
               { value: 'disabled', label: 'đang chờ duyệt', disabled: true },
               { value: 'đang giao hàng', label: 'đang giao hàng' },
-              { value: 'đã thanh toán', label: 'đã thanh toán' },
+              { value: 'giao thành công', label: 'giao thành công' },
             ]}
           />
         </Form.Item>

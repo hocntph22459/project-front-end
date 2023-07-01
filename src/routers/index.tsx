@@ -12,19 +12,19 @@ import { CartPage } from "../pages/client/Cart";
 import OrderPage from "../pages/client/Bill";
 import LayoutAdmin from "../layouts/admin";
 import ManagementProduct from "../pages/admin/products/ManageProduct";
-import ManagementProductUpdate from "../pages/admin/products/components/ManageProductUpdate";
+import ManagementProductUpdate from "../pages/admin/products/ManageProductUpdate";
 import ManageCategory from "../pages/admin/categories/ManageCategory";
-import ManageCategoryUpdate from "../pages/admin/categories/components/ManageCategoryUpdate";
+import ManageCategoryUpdate from "../pages/admin/categories/ManageCategoryUpdate";
 import ManageComment from "../pages/admin/comments/ManageComment";
 import ManageContact from "../pages/admin/contacts/ManageContact";
 import ManageUser from "../pages/admin/user/ManageUser";
 import Management from "../pages/admin/dashboard/Management";
 import ManageHashtag from "../pages/admin/hashtags/ManageHashtag";
-import ManageHashtagUpdate from "../pages/admin/hashtags/components/ManageHashtagUpdate";
+import ManageHashtagUpdate from "../pages/admin/hashtags/ManageHashtagUpdate";
 import ManageBill from "../pages/admin/bills/ManageBill";
-import ManageBillUpdate from "../pages/admin/bills/components/ManageBillUpdate";
+import ManageBillUpdate from "../pages/admin/bills/ManageBillUpdate";
 import ManageAbout from "../pages/admin/abouts/ManageAbout";
-import ManageAboutUpdate from "../pages/admin/abouts/components/ManageAboutUpdate";
+import ManageAboutUpdate from "../pages/admin/abouts/ManageAboutUpdate";
 const Router = () => {
     return (
         <BrowserRouter>

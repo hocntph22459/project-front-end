@@ -18,7 +18,7 @@ export const CreateAbout = (data: IAbout) => {
 }
 
 export const UpdateAbout = (data: IAbout) => {
-    return intansce.put('/abouts/' + data._id, data, {
+    return intansce.put(`/abouts/${data._id}`, data, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },

@@ -8,8 +8,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
-import IAbout from '../../../../types/about';
-import { GetOneAbout, UpdateAbout } from '../../../../api/about';
+import IAbout from '../../../types/about';
+import { GetOneAbout, UpdateAbout } from '../../../api/about';
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ const ManageAboutUpdate = () => {
         formData.append(`file`, file.originFileObj as Blob);
         formData.append('upload_preset', upload_preset);
         formData.append('cloud_name', cloud_name);
-        formData.append('folder', 'duancanhan');
+        formData.append('folder', 'project');
         console.log(file.originFileObj as Blob)
       });
       const res = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/upload`, formData, {
@@ -71,9 +71,7 @@ const ManageAboutUpdate = () => {
       })
         .then(res => res.data);
       values.image = res.secure_url;
-
       const key = 'loading';
-
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
         const response = await UpdateAbout(values);
@@ -81,8 +79,8 @@ const ManageAboutUpdate = () => {
           message.success('successfully update', 3);
       }
       navigate('/admin/abouts');
-    } catch (error) {
-      message.error('Failed to update');
+    } catch (error:any) {
+      message.error(error.response.data.message, 5);
     }
     console.log(values)
   };
@@ -99,7 +97,6 @@ const ManageAboutUpdate = () => {
     image: about.image,
     description: about.description,
   };
-
   return (
     <>
       <Form initialValues={initial}

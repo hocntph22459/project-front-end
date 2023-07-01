@@ -1,35 +1,34 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
-import IhashTag from '../../../../types/hashtag';
-import { GetOneHashtag, UpdateHashtag } from '../../../../api/hashtags';
+import { ICategory } from '../../../types/category';
+import { GetOneCategory, UpdateCategory } from '../../../api/categories';
 
-const ManageHashtagUpdate = () => {
+const ManageCategoryUpdate = () => {
   const navigate = useNavigate();
-  const { id }: string | any = useParams();
-  const [hashtag, sethashtag] = useState<IhashTag>()
-  useEffect(() => {
-    GetOneHashtag(id).then(({ data }) => sethashtag(data))
-  }, [])
-  const onFinish = async (values: IhashTag) => {
+  const { id }:string | any = useParams();
+  const onFinish = async (values: ICategory) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
-        const response = await UpdateHashtag(values);
+        const response = await UpdateCategory(values);
         if (response)
-          message.success('successfully update hashtags', 3);
-        navigate('/admin/hashtags');
+          message.success('successfully update categories', 3);
+          navigate('/admin/categories');
       }
-    } catch (error: any) {
-      message.error('update failed hashtags', 5);
+    } catch (error:any) {
+      message.error(error.response.data.message,5);
     }
   };
-
-  if (!hashtag) return null;
+  const [categorie, setcategorie] = useState<ICategory>();
+  useEffect(() => {
+    GetOneCategory(id).then(({ data }) => setcategorie(data));
+  }, []);
+  if (!categorie) return null;
   const initial = {
-    _id: hashtag._id,
-    name: hashtag.name,
+    _id: categorie._id,
+    name: categorie.name,
   };
   return (
     <Form layout="vertical" autoComplete="off" onFinish={onFinish} initialValues={initial}>
@@ -57,4 +56,4 @@ const ManageHashtagUpdate = () => {
   );
 };
 
-export default ManageHashtagUpdate;
+export default ManageCategoryUpdate;

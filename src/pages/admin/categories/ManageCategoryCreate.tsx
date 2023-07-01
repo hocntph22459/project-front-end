@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Modal, Row, message } from 'antd';
-import { ICategory } from '../../../../types/category';
-import { CreateCategory } from '../../../../api/categories';
+import { ICategory } from '../../../types/category';
+import { CreateCategory } from '../../../api/categories';
 import { useState } from 'react';
 import { PlusOutlined } from "@ant-design/icons"
 
@@ -33,8 +33,8 @@ const ManageCategoryCreate = (props: Props) => {
         message.success('successfully Create categories', 3);
         props.onCategoryCreated(response);
       }
-    } catch (error) {
-      message.error('Failed Create categories', 5);
+    } catch (error:any) {
+      message.error(error.response.data.message,5);
     }
   };
   return (

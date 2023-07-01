@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import IhashTag from '../../../types/hashtag';
 import { GetAllHashtag, RemoveHashtag } from '../../../api/hashtags';
 import { Link } from 'react-router-dom';
-import { DeleteOutlined,EditOutlined } from "@ant-design/icons"
-import ManageHashtagCreate from './components/ManageHashtagCreate';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
+import ManageHashtagCreate from './ManageHashtagCreate';
 
 const ManageHashtag = () => {
   const [hashtags, sethashtags] = useState<IhashTag[]>([])
@@ -41,8 +41,8 @@ const ManageHashtag = () => {
           message.success('Canceled!');
         },
       });
-    } catch (error) {
-      message.error('Delete failed!', 5);
+    } catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
   };
   const columns = [
@@ -66,12 +66,12 @@ const ManageHashtag = () => {
       render: (item: IhashTag) =>
         <>
           <Link to={`/admin/hashtags/${item.key}/update`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><EditOutlined/></button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><EditOutlined /></button>
           </Link>
           <button type="button"
             onClick={() => HandleRemoveHashtag(item.key)}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            <DeleteOutlined/>
+            <DeleteOutlined />
           </button>
         </>
     },
@@ -92,7 +92,7 @@ const ManageHashtag = () => {
     )
   return (
     <>
-    <ManageHashtagCreate/>
+      <ManageHashtagCreate />
       <Table
         columns={columns}
         dataSource={data}

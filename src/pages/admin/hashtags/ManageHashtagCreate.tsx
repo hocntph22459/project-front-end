@@ -1,7 +1,7 @@
 import { Button, Col, Form, Input, Modal, Row, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import IhashTag from '../../../../types/hashtag';
-import { CreateHashtag } from '../../../../api/hashtags';
+import IhashTag from '../../../types/hashtag';
+import { CreateHashtag } from '../../../api/hashtags';
 import { useState } from 'react';
 import { PlusOutlined } from "@ant-design/icons"
 const ManageHashtagCreate = () => {
@@ -32,7 +32,7 @@ const ManageHashtagCreate = () => {
       }
 
     } catch (error: any) {
-      message.error('create failed hashtags', 5);
+      message.error(error.response.data.message, 5);
     }
 
   };

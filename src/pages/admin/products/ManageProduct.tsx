@@ -3,7 +3,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { IProduct, ISizes } from '../../../types/product';
 import { GetAllProduct, RemoveProduct } from '../../../api/product';
 import { Link } from 'react-router-dom';
-import ManagementProductCreate from './components/ManageProductCreate';
+import ManagementProductCreate from './ManageProductCreate';
 import { useEffect, useState } from 'react';
 
 const ManagementProduct = () => {
@@ -40,8 +40,8 @@ const ManagementProduct = () => {
           message.success('Canceled!');
         },
       });
-    } catch (error) {
-      message.error('Delete failed!', 5);
+    } catch (error:any) {
+          message.error(error.response.data.message,5);
     }
   };
   const columns = [

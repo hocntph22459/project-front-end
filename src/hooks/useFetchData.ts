@@ -29,9 +29,7 @@ const useFetchData = (url: string) => {
         const fetchData = async () => {
             try {
                 const result = await intansce.get(url);
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
+                setLoading(false);
                 setError(null)
                 setData(result.data);
             } catch (error: any) {
@@ -39,7 +37,7 @@ const useFetchData = (url: string) => {
             }
         };
         fetchData();
-    }, [url,dispatch]);
+    }, [url, dispatch]);
 
     return { data, loading, error };
 };

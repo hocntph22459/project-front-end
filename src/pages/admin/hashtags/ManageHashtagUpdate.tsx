@@ -1,35 +1,36 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
-import { ICategory } from '../../../../types/category';
-import { GetOneCategory, UpdateCategory } from '../../../../api/categories';
+import { GetOneHashtag, UpdateHashtag } from '../../../api/hashtags';
+import IhashTag from '../../../types/hashtag';
 
-const ManageCategoryUpdate = () => {
+
+const ManageHashtagUpdate = () => {
   const navigate = useNavigate();
-  const { id }:string | any = useParams();
-  const onFinish = async (values: ICategory) => {
+  const { id }: string | any = useParams();
+  const [hashtag, sethashtag] = useState<IhashTag>()
+  useEffect(() => {
+    GetOneHashtag(id).then(({ data }) => sethashtag(data))
+  }, [])
+  const onFinish = async (values: IhashTag) => {
     const key = 'loading';
     try {
       const loading = await message.loading({ content: 'loading!', key, duration: 2 });
       if (loading) {
-        const response = await UpdateCategory(values);
+        const response = await UpdateHashtag(values);
         if (response)
-          message.success('successfully update categories', 3);
-        navigate('/admin/categories');
-        // GetAllCategory().then(({ data }) => setcategories(data));
+          message.success('successfully update hashtags', 3);
+        navigate('/admin/hashtags');
       }
-    } catch (error) {
-        message.error('Failed to update categories', 5);
+    } catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
   };
-  const [categorie, setcategorie] = useState<ICategory>();
-  useEffect(() => {
-    GetOneCategory(id).then(({ data }) => setcategorie(data));
-  }, []);
-  if (!categorie) return null;
+
+  if (!hashtag) return null;
   const initial = {
-    _id: categorie._id,
-    name: categorie.name,
+    _id: hashtag._id,
+    name: hashtag.name,
   };
   return (
     <Form layout="vertical" autoComplete="off" onFinish={onFinish} initialValues={initial}>
@@ -57,4 +58,4 @@ const ManageCategoryUpdate = () => {
   );
 };
 
-export default ManageCategoryUpdate;
+export default ManageHashtagUpdate;

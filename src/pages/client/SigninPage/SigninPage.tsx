@@ -121,7 +121,7 @@ const SigninPage = () => {
                             {
                                 message: 'vui lòng nhập password!',
                                 required: true,
-                                min:6
+                                min: 6
                             },
                         ]}
                     >

@@ -3,7 +3,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { ICategory } from '../../../types/category';
 import { GetAllCategory, RemoveCategory } from '../../../api/categories';
 import { Link } from 'react-router-dom';
-import ManageCategoryAdd from './components/ManageCategoryCreate';
+import ManageCategoryAdd from './ManageCategoryCreate';
 import { useEffect, useState } from 'react';
 
 const ManageCategory = () => {
@@ -42,8 +42,8 @@ const ManageCategory = () => {
           message.success('Canceled!');
         },
       });
-    } catch (error) {
-      message.error('Delete failed!', 5);
+    } catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
   };
   const columns = [

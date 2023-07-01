@@ -65,8 +65,8 @@ const ManageComment = () => {
           message.success('Canceled!');
         },
       });
-    } catch (error) {
-      message.error('Delete failed!', 5);
+    } catch (error:any) {
+          message.error(error.response.data.message,5);
     }
   };
   

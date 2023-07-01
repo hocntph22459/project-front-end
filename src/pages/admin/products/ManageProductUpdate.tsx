@@ -8,19 +8,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, } from 'antd';
-import { ICategory } from '../../../../types/category';
-import { IProduct } from '../../../../types/product';
-import { CreateProduct, GetAllProduct, GetOneProduct, UpdateProduct } from '../../../../api/product';
-import IhashTag from '../../../../types/hashtag';
-import { GetAllCategory } from '../../../../api/categories';
-import { GetAllHashtag } from '../../../../api/hashtags';
-
+import { GetAllCategory } from '../../../api/categories';
+import { ICategory } from '../../../types/category';
+import IhashTag from '../../../types/hashtag';
+import { IProduct } from '../../../types/product';
+import { GetAllHashtag } from '../../../api/hashtags';
+import { GetOneProduct } from '../../../api/product';
 
 type Size = {
   size: string,
   quantity: number,
 };
-
 const ManagementProductUpdate = () => {
   const { id }: string | any = useParams()
   const navigate = useNavigate();
@@ -99,8 +97,8 @@ const ManagementProductUpdate = () => {
         console.error(error);
       }
     }
-    catch (error) {
-      message.error('Failed to Update product');
+    catch (error:any) {
+      message.error(error.response.data.message, 5);
     }
   };
 
