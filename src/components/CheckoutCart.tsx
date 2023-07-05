@@ -6,15 +6,6 @@ import { CreateBill } from '../api/bill';
 import { useNavigate } from 'react-router-dom';
 import SigninPage from '../pages/client/SigninPage';
 import IBill from '../types/bill';
-const MyFormItemContext = createContext<(string | number)[]>([]);
-function toArr(str: string | number | (string | number)[]): (string | number)[] {
-    return Array.isArray(str) ? str : [str];
-}
-const MyFormItem = ({ name, ...props }: FormItemProps) => {
-    const prefixPath = useContext(MyFormItemContext);
-    const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-    return <Form.Item name={concatName} {...props} />;
-};
 
 const CheckoutCart = ({ totalPrice }: any) => {
     const user = localStorage.getItem("user");
@@ -67,7 +58,7 @@ const CheckoutCart = ({ totalPrice }: any) => {
                     Complete your order by providing your payment details.
                 </p>
                 <Form name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
-                    <MyFormItem className='text-black font-bold'
+                    <Form.Item className='text-black font-bold'
                         rules={[
                             {
                                 message: 'vui lòng nhập name!',
@@ -78,8 +69,8 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         label="name"
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập name" />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         name="email"
                         label="Email"
                         rules={[
@@ -91,8 +82,8 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         ]}
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập email" />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         rules={[
                             {
                                 message: 'vui lòng nhập Phone!',
@@ -103,8 +94,8 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         label="Phone"
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập name" />
-                    </MyFormItem>
-                    <MyFormItem className='text-black font-bold'
+                    </Form.Item>
+                    <Form.Item className='text-black font-bold'
                         rules={[
                             {
                                 message: 'vui lòng nhập Address!',
@@ -115,8 +106,8 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         label="Address"
                     >
                         <Input className='font-mono border border-indigo-600 h-10' placeholder="nhập name" />
-                    </MyFormItem>
-                    <MyFormItem className='flex w-[200px]'>
+                    </Form.Item>
+                    <Form.Item className='flex w-[200px]'>
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             sitekey="6Ld_Ek8mAAAAAKtnDYdUCNiClx9m52L_aafio6we"
@@ -127,7 +118,7 @@ const CheckoutCart = ({ totalPrice }: any) => {
                         ) : (
                             <p className='text-[red]'>Vui lòng xác thực bằng Recaptcha trước khi tiếp tục.</p>
                         )}
-                    </MyFormItem>
+                    </Form.Item>
 
                     {/* Total */}
                     <div className="mb-2 flex justify-between mt-4">

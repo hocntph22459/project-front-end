@@ -10,43 +10,15 @@ const ManageComment = () => {
     GetAllComment().then(({ data }) => setcomments(data))
   }, [])
   const HandleRemoveComment = async (id: string) => {
-    const key = 'loading';
-    try {
-      const loading = await message.loading({ content: 'loading!', key, duration: 2 });
-      // Hiển thị hộp thoại xác nhận trước khi xóa contact
-      Modal.confirm({
-        title: 'Confirm',
-        content: 'Are you sure you want to delete this contact?',
-        okText: 'Yes',
-        cancelText: 'No',
-        okButtonProps: {
-          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
-        },
-        onOk: async () => {
-          if (loading) {
-            const response = await RemoveComment(id);
-            if (response) {
-              message.success('successfully delete contacts', 3);
-              const dataNew = comments.filter(comment => comment._id !== id);
-              setcomments(dataNew);
-            }
-          }
-        },
-        onCancel: () => {
-          message.success('clicked cancel button')
-        }
-      });
-    } catch (error) {
-      message.error('delete failed contacts', 5);
-    }
-  }
-  const HandleRemoveBill = async (id: string) => {
     try {
       Modal.confirm({
         title: 'Confirm',
         content: 'Are you sure you want to delete this about?',
         okText: 'Yes',
         cancelText: 'No',
+        okButtonProps: {
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // áp dụng lớp CSS
+        },
         onOk: async () => {
           const loading = message.loading({ content: 'Loading...', duration: 0 });
           setTimeout(async () => {
@@ -65,11 +37,11 @@ const ManageComment = () => {
           message.success('Canceled!');
         },
       });
-    } catch (error:any) {
-          message.error(error.response.data.message,5);
+    } catch (error: any) {
+      message.error(error.response.data.message, 5);
     }
   };
-  
+
   const columns = [
     {
       title: 'stt',
@@ -94,7 +66,11 @@ const ManageComment = () => {
     {
       title: 'action',
       render: (item: IComment) => <>
-        <Button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={() => HandleRemoveComment(item.key)}><DeleteOutlined /></Button>
+        <button type="button"
+          onClick={() => HandleRemoveComment(item.key)}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          <DeleteOutlined />
+        </button>
       </>
     },
   ];
@@ -105,7 +81,7 @@ const ManageComment = () => {
       key: item._id,
       content: item.content,
       createdAt: item.createdAt,
-      product: item.product
+      product: item.Product_id
     }
   })
   if (listData.length == 0)

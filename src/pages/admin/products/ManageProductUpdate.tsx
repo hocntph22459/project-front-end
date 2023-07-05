@@ -2,18 +2,16 @@ import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { UploadOutlined } from '@ant-design/icons';
 import {
-  Button, Form, Image, Input, Select, message,
+  Button, Form, Input, Select, message,
 } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { PlusOutlined } from '@ant-design/icons';
-import { Modal, } from 'antd';
 import { GetAllCategory } from '../../../api/categories';
 import { ICategory } from '../../../types/category';
 import IhashTag from '../../../types/hashtag';
 import { IProduct } from '../../../types/product';
 import { GetAllHashtag } from '../../../api/hashtags';
-import { GetOneProduct } from '../../../api/product';
+import { GetOneProduct, UpdateProduct } from '../../../api/product';
 
 type Size = {
   size: string,
@@ -85,14 +83,14 @@ const ManagementProductUpdate = () => {
           sizes: sizes,
         }
         console.log(DataNew)
-        // const key = 'loading'
-        // const loading = await message.loading({ content: 'loading!', key, duration: 2 })
-        // if (loading) {
-        //   const response = await UpdateProduct(DataNew);
-        //   if (response)
-        //     message.success('Update successfully Product', 3);
-        //   navigate('/admin/products');
-        // }
+        const key = 'loading'
+        const loading = await message.loading({ content: 'loading!', key, duration: 2 })
+        if (loading) {
+          const response = await UpdateProduct(DataNew);
+          if (response)
+            message.success(response.data.message, 3);
+          navigate('/admin/products');
+        }
       } catch (error) {
         console.error(error);
       }

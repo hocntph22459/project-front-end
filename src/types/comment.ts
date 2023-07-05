@@ -1,9 +1,9 @@
 interface IComment {
-    _id: string;
-    key: string;
+    _id?: string;
+    key?: string | any
     content: string,
-    product: string,
-    user: string,
+    Product_id?: string,
+    User_id: string,
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date | null,

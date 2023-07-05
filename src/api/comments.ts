@@ -9,7 +9,11 @@ export const GetOneComment = (_id: number) => {
     return intansce.get('/comments/' + _id)
 }
 
-export const CreateComment = (data: IComment) => {
+export const GetCommentByProduct = (Productid: string) => {
+    return intansce.get('/comment/product/' + Productid)
+}
+
+export const CreateCommentByProduct = (data: IComment) => {
     return intansce.post('/comments', data)
 }
 

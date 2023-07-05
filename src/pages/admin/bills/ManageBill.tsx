@@ -72,6 +72,11 @@ const ManageBill = () => {
       key: 'address'
     },
     {
+      title: 'created At',
+      dataIndex: 'createdAt',
+      key: 'createdAt'
+    },
+    {
       title: 'total',
       dataIndex: 'total',
       key: 'total'
@@ -114,6 +119,7 @@ const ManageBill = () => {
       email: item.email,
       phone: item.phone,
       address: item.address,
+      createdAt: item.createdAt,
       total: item.total,
       items: item.items,
       status: item.status

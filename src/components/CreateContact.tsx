@@ -4,16 +4,6 @@ import { message } from "antd"
 import { createContext, useContext } from 'react';
 import { CreateContact } from '../api/contact';
 import IContact from '../types/contact';
-const MyFormItemContext = createContext<(string | number)[]>([]);
-function toArr(str: string | number | (string | number)[]): (string | number)[] {
-    return Array.isArray(str) ? str : [str];
-}
-const MyFormItem = ({ name, ...props }: FormItemProps) => {
-    const prefixPath = useContext(MyFormItemContext);
-    const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-    return <Form.Item name={concatName} {...props} />;
-};
-
 const FormCreateContact = () => {
     const Navigate = useNavigate()
     const onFinish = async (value: IContact) => {
@@ -61,7 +51,7 @@ const FormCreateContact = () => {
             </div>
             <div className="px-8 py-8 bg-white border rounded-md shadow-md dark:border-gray-800 dark:bg-gray-800">
                 <Form className="mt-4 max-w-lg mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
-                    <MyFormItem
+                    <Form.Item
                         name="name"
                         label="name"
                         rules={[
@@ -72,8 +62,8 @@ const FormCreateContact = () => {
                         ]}
                     >
                         <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter name" />
-                    </MyFormItem>
-                    <MyFormItem
+                    </Form.Item>
+                    <Form.Item
                         name="email"
                         label="Email"
                         rules={[
@@ -85,8 +75,8 @@ const FormCreateContact = () => {
                         ]}
                     >
                         <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter email" />
-                    </MyFormItem>
-                    <MyFormItem
+                    </Form.Item>
+                    <Form.Item
                         name="phone"
                         label="phone"
                         rules={[
@@ -97,8 +87,8 @@ const FormCreateContact = () => {
                         ]}
                     >
                         <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter phone" />
-                    </MyFormItem>
-                    <MyFormItem
+                    </Form.Item>
+                    <Form.Item
                         name="address"
                         label="address"
                         rules={[
@@ -109,8 +99,8 @@ const FormCreateContact = () => {
                         ]}
                     >
                         <Input className='border border-indigo-600 h-10 rounded-md px-4 py-2 text-lg lg:w-[600px]' placeholder="please enter address" />
-                    </MyFormItem>
-                    <MyFormItem
+                    </Form.Item>
+                    <Form.Item
                         name="support"
                         label="support"
                         rules={[
@@ -121,7 +111,7 @@ const FormCreateContact = () => {
                         ]}
                     >
                         <Input.TextArea className='border border-indigo-600 rounded-md px-4 py-2 text-lg' rows={4} />
-                    </MyFormItem>
+                    </Form.Item>
                     <Button
                         htmlType="submit"
                         className="w-full rounded-lg h-12 text-center py-3 bg-black text-white hover:bg-green-dark focus:outline-none my-1"

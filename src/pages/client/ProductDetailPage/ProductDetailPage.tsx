@@ -5,6 +5,7 @@ import { GetOneProduct } from '../../../api/product'
 import { IProductDetail } from '../../../types/product'
 import ListProductDetail from '../../../components/ListProductDetail'
 import ListRelatedProduct from '../../../components/ListRelatedProduct'
+import CreateComment from '../../../components/CreateComment'
 const ProductDetailPage = () => {
   const { id }: string | any = useParams()
   const [product, setproduct] = useState<IProductDetail>()
@@ -16,6 +17,7 @@ const ProductDetailPage = () => {
   return (
     <section>
       <ListProductDetail product={product} />
+      <CreateComment/>
       <ListRelatedProduct product={product} />
     </section>
   )
