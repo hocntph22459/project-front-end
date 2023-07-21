@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const intansce = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: "https://backend-project-0gio.onrender.com/api",
 });
 
 // Add a request interceptor
