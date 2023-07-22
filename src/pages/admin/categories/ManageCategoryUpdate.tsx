@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
 import { ICategory } from '../../../types/category';
-import { GetOneCategory, UpdateCategory } from '../../../api/categories';
+import { GetOneCategory, UpdateCategory } from '../../../services/categories';
 
 const ManageCategoryUpdate = () => {
   const navigate = useNavigate();

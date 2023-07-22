@@ -1,7 +1,7 @@
 import { Table, Empty, message, Image, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
-import { GetAllAbout, RemoveAbout } from '../../../api/about';
+import { GetAllAbout, RemoveAbout } from '../../../services/about';
 import IAbout from '../../../types/about';
 import { Link } from 'react-router-dom';
 
@@ -100,7 +100,7 @@ const columns = [
 
 const listData = abouts.map((item: IAbout, index: number) => {
   return {
-    index: index,
+    index: index + 1,
     key: item._id,
     name: item.name,
     email: item.email,

@@ -13,9 +13,13 @@ const ProductPage = () => {
       <div className="main-banner">
         <img src="https://file.hstatic.net/1000376021/file/1920x720_d628af2ab2c24b26b156660120d24bef.png" alt="" />
       </div>
-      <div className='my-16' style={{ display: 'grid', gridTemplateColumns: '330px 1fr' }}>
-        <ListCategories categories={categories} />
-        <ListProducts products={products} />
+      <div className='my-16 px-4 sm:grid grid-cols-10'>
+        <div className='col-span-3'>
+          <ListCategories categories={categories} />
+        </div>
+        <div className='col-span-7'>
+          <ListProducts products={products} />
+        </div>
       </div>
     </section>
   )

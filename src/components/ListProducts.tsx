@@ -24,13 +24,28 @@ const ListProducts = (props: Props) => {
         {currentProducts.map((item) => (
           <div key={item._id} className="bg-white p-4 shadow-md rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
             <div className=''>
+
               <Link to={`/products/${item._id}`}>
                 <div className="relative bg-gray-200">
-                  <img
-                    src={item.images[0]}
-                    alt=""
-                    className="object-cover w-full h-56 mx-auto "
-                  />
+                  <div className="relative bg-gray-200">
+                    <img
+                      src={item.images[0]}
+                      alt=""
+                      className="object-cover w-full h-56 mx-auto "
+                    />
+                    {item.salePrice > 0 && (
+                      <div className="absolute top-0 right-0 z-10 m-1 flex items-center justify-center w-16 h-16 p-5 text-center text-gray-100 bg-red-600 rounded-full shadow-xl ">
+                        <span className="relative text-base font-semibold text-gray-200 ">
+                          {(
+                            ((item.price - item.salePrice) /
+                              item.price) *
+                            100
+                          ).toFixed(0)}
+                          % sale
+                        </span>
+                      </div>
+                    )}
+                  </div>
                   {item.salePrice > 0 && (
                     <div className="absolute top-0 right-0 z-10 m-1 flex items-center justify-center w-16 h-16 p-5 text-center text-gray-100 bg-red-600 rounded-full shadow-xl ">
                       <span className="relative text-base font-semibold text-gray-200 ">{((item.price - item.salePrice) / item.price * 100).toFixed(0)}% sale</span>

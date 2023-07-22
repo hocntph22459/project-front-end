@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Col, Form, Input, Row, message } from 'antd';
-import { GetOneHashtag, UpdateHashtag } from '../../../api/hashtags';
+import { GetOneHashtag, UpdateHashtag } from '../../../services/hashtags';
 import IhashTag from '../../../types/hashtag';
 
 

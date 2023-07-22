@@ -1,7 +1,7 @@
 import { Table, Button, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IComment from '../../../types/comment';
-import { GetAllComment, RemoveComment } from '../../../api/comments';
+import { GetAllComment, RemoveComment } from '../../../services/comments';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageComment = () => {
@@ -77,7 +77,7 @@ const ManageComment = () => {
 
   const listData = comments.map((item: IComment, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       content: item.content,
       createdAt: item.createdAt,

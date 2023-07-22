@@ -2,7 +2,7 @@ import { Button, Modal, FormItemProps, Form, Input, message } from 'antd';
 import { createContext, useContext, useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
 import IUser from '../../../types/user';
-import { ForgotPass } from '../../../api/auth';
+import { ForgotPass } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 const MyFormItemContext = createContext<(string | number)[]>([]);
 

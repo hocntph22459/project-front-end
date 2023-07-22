@@ -10,7 +10,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Modal, } from 'antd';
 import { ICategory } from '../../../types/category';
 import { IProduct } from '../../../types/product';
-import { CreateProduct, GetAllProduct } from '../../../api/product';
+import { CreateProduct, GetAllProduct } from '../../../services/product';
 import IhashTag from '../../../types/hashtag';
 import useFetchData from '../../../hooks/useFetchData';
 

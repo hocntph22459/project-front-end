@@ -1,7 +1,7 @@
 import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IContact from '../../../types/contact';
-import { GetAllContact, RemoveContact } from '../../../api/contact';
+import { GetAllContact, RemoveContact } from '../../../services/contact';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageContact = () => {
@@ -85,7 +85,7 @@ const ManageContact = () => {
   const listData = contacts.map((item, index) => {
     return {
       key: item._id,
-      index: index,
+      index: index + 1,
       name: item.name,
       email: item.email,
       phone: item.phone,

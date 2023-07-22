@@ -6,12 +6,12 @@ import {
 } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { GetAllCategory } from '../../../api/categories';
+import { GetAllCategory } from '../../../services/categories';
 import { ICategory } from '../../../types/category';
 import IhashTag from '../../../types/hashtag';
 import { IProduct } from '../../../types/product';
-import { GetAllHashtag } from '../../../api/hashtags';
-import { GetOneProduct, UpdateProduct } from '../../../api/product';
+import { GetAllHashtag } from '../../../services/hashtags';
+import { GetOneProduct, UpdateProduct } from '../../../services/product';
 
 type Size = {
   size: string,

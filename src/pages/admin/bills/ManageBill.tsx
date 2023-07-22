@@ -2,7 +2,7 @@ import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { Link } from 'react-router-dom';
-import { GetAllBill, RemoveBill } from '../../../api/bill';
+import { GetAllBill, RemoveBill } from '../../../services/bill';
 import IBill from '../../../types/bill';
 import ListItemsOrder from '../../../components/ListItemsOrder';
 
@@ -113,7 +113,7 @@ const ManageBill = () => {
 
   const listData = bills.map((item: IBill, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       name: item.name,
       email: item.email,

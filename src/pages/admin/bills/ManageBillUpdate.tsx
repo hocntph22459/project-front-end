@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import IBill from '../../../types/bill';
-import { GetOneBill, UpdateBill } from '../../../api/bill';
+import { GetOneBill, UpdateBill } from '../../../services/bill';
 const ManageBillUpdate = () => {
   const { id }: string | any = useParams()
   const [orders, setorders] = useState<IBill>();

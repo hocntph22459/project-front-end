@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Modal, Row, message } from 'antd';
 import { ICategory } from '../../../types/category';
-import { CreateCategory } from '../../../api/categories';
+import { CreateCategory } from '../../../services/categories';
 import { useState } from 'react';
 import { PlusOutlined } from "@ant-design/icons"
 

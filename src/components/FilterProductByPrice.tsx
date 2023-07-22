@@ -32,15 +32,16 @@ const FilterProductByPrice = (props: Props) => {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className='mb-4'>
-                                        <p className="text-lg ">
-                                            <span className="text-red-400 dark:text-gray-400">
-                                                ${product.price}
+                                        <h4 className="font-medium text-[15px] mb-1 text-red-500">
+                                            {product.salePrice > 0
+                                                ? product.salePrice
+                                                : product.price}{"$   "}
+                                            <span className="text-gray-600 font-light line-through">
+                                                {product.salePrice > 0
+                                                    ? product.price + '$'
+                                                    : ""}
                                             </span>
-                                            {product.salePrice == undefined ? <span className="ml-2 text-gray-400 line-through dark:text-gray-400">
-                                            </span> : <span className="ml-2 text-gray-400 line-through dark:text-gray-400">
-                                                ${product.salePrice}
-                                            </span>}
-                                        </p>
+                                        </h4>
                                     </div>
                                     <div className="text-base font-normal mb-4 text-gray-400 dark:text-gray-400">
                                         <span><EyeInvisibleOutlined className='mr-2' />{product.views}</span>

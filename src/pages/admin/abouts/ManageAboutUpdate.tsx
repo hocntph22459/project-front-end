@@ -9,7 +9,7 @@ import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 import IAbout from '../../../types/about';
-import { GetOneAbout, UpdateAbout } from '../../../api/about';
+import { GetOneAbout, UpdateAbout } from '../../../services/about';
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {

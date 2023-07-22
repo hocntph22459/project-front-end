@@ -2,7 +2,7 @@ import { Button, Form, FormItemProps, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { message } from "antd"
 import { createContext, useContext } from 'react';
-import { CreateContact } from '../api/contact';
+import { CreateContact } from '../services/contact';
 import IContact from '../types/contact';
 const FormCreateContact = () => {
     const Navigate = useNavigate()

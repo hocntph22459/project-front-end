@@ -1,7 +1,7 @@
 import { Table, Empty, Image, message, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { IProduct, ISizes } from '../../../types/product';
-import { GetAllProduct, RemoveProduct } from '../../../api/product';
+import { GetAllProduct, RemoveProduct } from '../../../services/product';
 import { Link } from 'react-router-dom';
 import ManagementProductCreate from './ManageProductCreate';
 import { useEffect, useState } from 'react';
@@ -54,7 +54,9 @@ const ManagementProduct = () => {
     {
       title: 'name',
       dataIndex: 'name',
-      key: 'name',
+      render: (t: any, r: any) => (
+        <Link to={`/products/${r.key}`} target="_blank">{`${r.name}`}</Link>
+      ),
     },
     {
       title: 'price',
@@ -65,31 +67,32 @@ const ManagementProduct = () => {
       title: 'salePrice',
       dataIndex: 'salePrice',
       key: 'salePrice',
+      width: 5
     },
     {
-      title: 'size',
-      dataIndex: 'sizes',
-      key: 'sizes',
-      render: (sizes: ISizes[]) => (
-        <>
-          {sizes.map((size) => (
-            <p key={size._id}>{size.size}</p>
+      title: "sizes",
+      dataIndex: "sizes",
+      render: (t: any, r: any) => (
+        <div className="flex">
+          <div className="border border-gray-300">
+            <div className="border-b border-gray-300 font-semibold  px-3">
+              Size
+            </div>
+            <div className="font-semibold text-center">quantity</div>
+          </div>
+          {r.sizes.map((item: any, index: number) => (
+            <div
+              key={index}
+              className="border-b border-t border-r border-gray-300"
+            >
+              <div className="border-b border-gray-300 font-semibold px-3">
+                {item.size}
+              </div>
+              <div className="text-center">{item.quantity}</div>
+            </div>
           ))}
-        </>
+        </div>
       ),
-    },
-    {
-      title: 'quantity',
-      dataIndex: 'sizes',
-      key: 'sizes',
-      render: (sizes: ISizes[]) => (
-        <>
-          {sizes.map((size) => (
-            <p key={size._id}>{size.quantity}</p>
-          ))}
-        </>
-      ),
-      width: 20
     },
     {
       title: 'images',
@@ -120,10 +123,10 @@ const ManagementProduct = () => {
     },
   ];
 
-  const listData = Array.from(products).map((item: IProduct, index: Number) => ({
+  const listData = Array.from(products).map((item: IProduct, index: number) => ({
     key: item._id,
-    index: index,
-    href: '/post/' + item._id,
+    index: index + 1,
+    href: '/product/' + item._id,
     name: item.name,
     price: item.price,
     salePrice: item.salePrice,

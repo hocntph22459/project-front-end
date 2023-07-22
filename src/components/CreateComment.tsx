@@ -1,7 +1,7 @@
 import { message, Form, Input } from 'antd';
 import IComment from '../types/comment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CreateCommentByProduct } from '../api/comments';
+import { CreateCommentByProduct } from '../services/comments';
 import useFetchData from '../hooks/useFetchData';
 const CreateComment = () => {
     const { id }: string | any = useParams()

@@ -1,7 +1,7 @@
 import { Table, Empty, message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IhashTag from '../../../types/hashtag';
-import { GetAllHashtag, RemoveHashtag } from '../../../api/hashtags';
+import { GetAllHashtag, RemoveHashtag } from '../../../services/hashtags';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import ManageHashtagCreate from './ManageHashtagCreate';
@@ -79,7 +79,7 @@ const ManageHashtag = () => {
 
   const data = hashtags.map((item: IhashTag, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       name: item.name,
       createdAt: item.createdAt,

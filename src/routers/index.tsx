@@ -4,7 +4,6 @@ import Homepage from "../pages/client/HomePage";
 import ProductPage from "../pages/client/ProductsPage";
 import ProductDetailPage from "../pages/client/ProductDetailPage";
 import ProductSale from "../pages/client/ProductsSalePage";
-import NotFoundPage from "../pages/client/404";
 import SignupPage from "../pages/client/SignupPage";
 import SigninPage from "../pages/client/SigninPage";
 import ContactPage from "../pages/client/ContactPage";
@@ -25,6 +24,8 @@ import ManageBill from "../pages/admin/bills/ManageBill";
 import ManageBillUpdate from "../pages/admin/bills/ManageBillUpdate";
 import ManageAbout from "../pages/admin/abouts/ManageAbout";
 import ManageAboutUpdate from "../pages/admin/abouts/ManageAboutUpdate";
+import NotFoundPage from "../pages/NotFoundPage";
+import ProfilesPage from "../pages/client/profiles/Profiles";
 const Router = () => {
     return (
         <BrowserRouter>
@@ -45,6 +46,7 @@ const Router = () => {
                         <Route index element={<OrderPage />} />
                     </Route>
                     <Route path='contacts' element={<ContactPage />} />
+                    <Route path='profile' element={<ProfilesPage />} />
                 </Route>
                 <Route path='admin' element={<LayoutAdmin />}>
                     <Route index element={<Management />} />

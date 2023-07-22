@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Button, Form, Input, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { message } from "antd"
-import { Signin } from '../../../api/auth';
+import { Signin } from '../../../services/auth';
 import IUser, { LoginResponse } from '../../../types/user';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';

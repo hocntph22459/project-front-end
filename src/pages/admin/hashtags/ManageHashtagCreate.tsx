@@ -1,7 +1,7 @@
 import { Button, Col, Form, Input, Modal, Row, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import IhashTag from '../../../types/hashtag';
-import { CreateHashtag } from '../../../api/hashtags';
+import { CreateHashtag } from '../../../services/hashtags';
 import { useState } from 'react';
 import { PlusOutlined } from "@ant-design/icons"
 const ManageHashtagCreate = () => {

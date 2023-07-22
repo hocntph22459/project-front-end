@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { GetOneProduct } from '../../../api/product'
+import { GetOneProduct } from '../../../services/product'
 
 import { IProductDetail } from '../../../types/product'
 import ListProductDetail from '../../../components/ListProductDetail'

@@ -1,7 +1,7 @@
 import { Table, Button, Empty, Input, message, Popconfirm, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import IUser from '../../../types/user';
-import { GetAllUser, RemoveUser } from '../../../api/user';
+import { GetAllUser, RemoveUser } from '../../../services/user';
 import { DeleteOutlined } from "@ant-design/icons"
 
 const ManageUser = () => {
@@ -87,7 +87,7 @@ const ManageUser = () => {
 
   const data = users.map((item: IUser, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       name: item.name,
       email: item.email,

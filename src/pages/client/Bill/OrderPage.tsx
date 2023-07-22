@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GetBillByUser } from '../../../api/bill'
+import { GetBillByUser } from '../../../services/bill'
 import EmptyCart from '../../../components/EmptyCart';
 import IBill from '../../../types/bill';
 import { Link } from 'react-router-dom';

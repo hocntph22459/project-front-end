@@ -1,15 +1,27 @@
-import { Menu } from "antd";
+import { Menu, message } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from 'antd';
 import { useSelector } from 'react-redux';
-import { ShoppingCartOutlined } from "@ant-design/icons"
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons"
 import SignupPage from "../../../../pages/client/SignupPage";
 import SigninPage from "../../../../pages/client/SigninPage";
 export default function HeaderLayoutClient() {
     const cartItems = useSelector((state: any) => state.cart.cartItems);
     const [show, setshow] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const user = localStorage.getItem("user");
 
+    function handleDropdownClick() {
+        setShowDropdown(!showDropdown);
+    }
+
+    async function handleLogout() {
+        // Implement logout logic here
+        localStorage.removeItem("user");
+        await message.warning("Đã đăng xuất", 2, () => { });
+        window.location.reload();
+    }
     return (
         <div className="bg-white">
             <nav className="2xl:container 2xl:mx-auto sm:py-6">
@@ -45,12 +57,48 @@ export default function HeaderLayoutClient() {
                                 }
                             </Link>
                         </div>
-                        <div>
-                            <SignupPage />
-                        </div>
-                        <div>
-                            <SigninPage />
-                        </div>
+                        {user ? (
+                            <div className="relative z-10">
+                                <button className="text-gray-800" onClick={handleDropdownClick}>
+                                    <UserOutlined
+                                        style={{ fontSize: "24px" }}
+                                        className="h-8 w-8 transform hover:scale-110 transition duration-200"
+                                    />
+                                </button>
+                                {showDropdown && (
+                                    <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                                        <Link
+                                            to="/profile"
+                                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                        >
+                                            Profile
+                                        </Link>
+                                        <Link
+                                            to="/order/bill"
+                                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                        >
+                                            Đơn hàng của tôi
+                                        </Link>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                        >
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (<>
+                            <div>
+                                <SignupPage />
+                            </div>
+                            <div>
+                                <SigninPage />
+                            </div>
+                        </>
+                        )
+                        }
+
                     </div>
                     {/* Burger Icon */}
                     <div id="bgIcon" onClick={() => setshow(!show)} className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800  justify-center items-center sm:hidden cursor-pointer`}>
@@ -83,26 +131,76 @@ export default function HeaderLayoutClient() {
                             </Menu.Item>
                         </Menu>
                     </div>
-                    <div className="py-4">
-                        <SignupPage />
-                    </div>
-                    <div className="pb-4">
-                        <SigninPage />
-                    </div>
-                    <div className="pt-4 pb-2">
-                        <Link to="/cart" className="text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center">
-                            <div className="relative flex-shrink-0">
-                                {cartItems.length === 0 ?
-                                    <Badge text={0}>
-                                        <ShoppingCartOutlined style={{ fontSize: '30px' }} className="text-gray-600" />
-                                    </Badge>
-                                    :
-                                    <Badge count={cartItems.length}>
-                                        <ShoppingCartOutlined className="h-5 w-5 ml-[20px]" style={{ fontSize: '30px' }} />
-                                    </Badge>
-                                }
-                            </div>
-                        </Link>
+                    <div className="mt-4 ml-[-10px] flex justify-between items-center">
+                        <div className="flex items-center">
+                            {user ? (
+                                <div className="relative z-10">
+                                    <button
+                                        className="text-gray-800"
+                                        onClick={handleDropdownClick}
+                                    >
+                                        <UserOutlined
+                                            style={{ fontSize: "18px" }}
+                                            className="h-8 w-8 transform hover:scale-110 transition duration-200"
+                                        />
+                                    </button>
+                                    {showDropdown && (
+                                        <div className="absolute bg-white shadow-md rounded-md overflow-hidden z-10 w-48">
+                                            <Link
+                                                to="/profile"
+                                                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                            >
+                                                Profile
+                                            </Link>
+                                            <Link
+                                                to="/mybill"
+                                                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                            >
+                                                Đơn hàng của tôi
+                                            </Link>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                            >
+                                                Logout
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="flex justify-center mx-4">
+                                    <div>
+                                        <SigninPage/>
+                                    </div>
+                                    <div>
+                                        <SignupPage/>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            {/* Shopping cart icon */}
+                            <Link
+                                to="/cart"
+                                className="mt-4 text-sm max-md:pb-4 max-md:pr-3 font-medium text-gray-700 hover:text-blue-400 flex items-center"
+                            >
+                                <div className="pt-4 pb-2">
+                                    <Link to="/cart" className="text-sm font-medium text-gray-700 hover:text-blue-400 flex items-center">
+                                        <div className="relative flex-shrink-0">
+                                            {cartItems.length === 0 ?
+                                                <Badge text={0}>
+                                                    <ShoppingCartOutlined style={{ fontSize: '30px' }} className="text-gray-600" />
+                                                </Badge>
+                                                :
+                                                <Badge count={cartItems.length}>
+                                                    <ShoppingCartOutlined className="h-5 w-5 ml-[20px]" style={{ fontSize: '30px' }} />
+                                                </Badge>
+                                            }
+                                        </div>
+                                    </Link>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </nav>

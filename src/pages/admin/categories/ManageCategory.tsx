@@ -1,7 +1,7 @@
 import { Table, Empty, message, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { ICategory } from '../../../types/category';
-import { GetAllCategory, RemoveCategory } from '../../../api/categories';
+import { GetAllCategory, RemoveCategory } from '../../../services/categories';
 import { Link } from 'react-router-dom';
 import ManageCategoryAdd from './ManageCategoryCreate';
 import { useEffect, useState } from 'react';
@@ -80,7 +80,7 @@ const ManageCategory = () => {
 
   const data = categories.map((item: ICategory, index: number) => {
     return {
-      index: index,
+      index: index + 1,
       key: item._id,
       name: item.name,
       createdAt: item.createdAt,
