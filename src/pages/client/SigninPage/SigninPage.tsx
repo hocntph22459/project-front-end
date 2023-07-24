@@ -67,7 +67,7 @@ const SigninPage = () => {
                 Signin
             </Button>
             <Modal footer={null} open={isModalOpen} onOk={handleOkSignin} onCancel={handleCancelSignin}>
-                <Form className="mt-[30px] w-[400px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
+                <Form className="mt-[30px] mx-auto sm:w-[400px]" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
                     <p tabIndex={0} role="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">
                         Login to your account
                     </p>

@@ -57,7 +57,7 @@ const SignupPage = () => {
                 Signup
             </Button>
             <Modal open={isModalOpen} footer={null} onOk={handleOkSignup} onCancel={handleCancelSignup}>
-                <Form className="mt-[30px] w-[400px] mx-auto" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
+                <Form className="mt-[30px] mx-auto sm:w-[400px]" name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
                     <p tabIndex={0} role="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800 mb-8">
                         signup to your account
                     </p>

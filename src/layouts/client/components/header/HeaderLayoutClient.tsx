@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux';
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons"
 import SignupPage from "../../../../pages/client/SignupPage";
 import SigninPage from "../../../../pages/client/SigninPage";
+import { RootState } from "../../../../redux/store";
 export default function HeaderLayoutClient() {
-    const cartItems = useSelector((state: any) => state.cart.cartItems);
+    const cartItems = useSelector((state: RootState) => state.cart.cartItems);
     const [show, setshow] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const user = localStorage.getItem("user");

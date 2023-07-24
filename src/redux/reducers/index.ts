@@ -8,5 +8,4 @@ const rootReducer = combineReducers({
   products:productsReducer,
   categories:categoriesReducer
 });
-export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer

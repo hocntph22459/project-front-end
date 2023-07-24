@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { createContext, useContext } from 'react';
 import { IProduct, IProductDetail } from '../types/product';
 import { addToCart } from '../redux/actions/cart/cartActions';
+import { AppDispatch } from '../redux/store';
 type Props = {
     product: IProductDetail
 }
@@ -18,7 +19,7 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
 };
 
 const ListProductDetail = (props: Props) => {
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
     const onFinish = async (values: IProduct) => {
         const cartData: any = {
             size: values.sizes,

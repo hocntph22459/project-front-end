@@ -3,13 +3,14 @@ import { removeFromCart } from '../../../redux/actions/cart/cartActions';
 import EmptyCart from '../../../components/EmptyCart';
 import { Link } from 'react-router-dom';
 import CheckoutCart from '../../../components/CheckoutCart';
+import { AppDispatch, RootState } from '../../../redux/store';
 function CartPage() {
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
     const handleRemove = (id: string) => {
         console.log(id)
         dispatch(removeFromCart(id));
     };
-    const cartItems = useSelector((state: any) => state.cart.cartItems);
+    const cartItems = useSelector((state: RootState) => state.cart.cartItems);
     const totalPrice = cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0);
     return (
         <>

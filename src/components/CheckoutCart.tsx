@@ -6,6 +6,7 @@ import { CreateBill } from '../services/bill';
 import { useNavigate } from 'react-router-dom';
 import SigninPage from '../pages/client/SigninPage';
 import IBill from '../types/bill';
+import { RootState } from '../redux/store';
 
 const CheckoutCart = ({ totalPrice }: any) => {
     const user = localStorage.getItem("user");
@@ -13,7 +14,7 @@ const CheckoutCart = ({ totalPrice }: any) => {
     const navigate = useNavigate()
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
-    const cartItems = useSelector((state: any) => state.cart.cartItems);
+    const cartItems = useSelector((state: RootState) => state.cart.cartItems);
     const onFinish = async (value: IBill) => {
         if (isVerified === true) {
             const key = 'loading'
@@ -31,7 +32,7 @@ const CheckoutCart = ({ totalPrice }: any) => {
                     }
                     if (BillData) {
                         try {
-                            const response:any = await CreateBill(BillData);
+                            const response: any = await CreateBill(BillData);
                             if (response) {
                                 message.success(response.message, 3);
                                 localStorage.removeItem('cartItems');

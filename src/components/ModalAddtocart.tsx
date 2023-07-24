@@ -5,6 +5,7 @@ import { Carousel, FormItemProps, Image, Input, Form, Select, message } from 'an
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions/cart/cartActions';
 import { createContext, useContext } from 'react';
+import { AppDispatch } from '../redux/store';
 type Props = {
     product: IProduct,
 }
@@ -20,7 +21,7 @@ const MyFormItem = ({ name, ...props }: FormItemProps) => {
 
 const ModalAddtocart = (props: Props) => {
     const [open, setOpen] = useState(false);
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
     const onFinish = async (values: IProduct) => {
         const cartData: any = {
             size: values.sizes,

@@ -38,27 +38,25 @@ const CreateComment = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <div>
-            <h1 className="text-2xl font-bold mb-4">Comment List</h1>
-{/* List of comments */}
-<div className="mb-8">
-  {data.length === 0 ? (
-    <div className="text-gray-600">chưa có bình luận nào</div>
-  ) : (
-    data.map((cmt: any) => {
-      return (
-        <div className="flex items-start mb-4" key={cmt._id}>
-          <div>
-            <p className="text-gray-600">{cmt.createdAt}</p>
-            <p>{cmt.content}</p>
-          </div>
-        </div>
-      );
-    })
-  )}
-</div>
-
+                <h1 className="text-2xl font-bold mb-4">Comment List</h1>
+                {/* List of comments */}
+                <div className="mb-8">
+                    {data.length === 0 ? (
+                        <div className="text-gray-600">chưa có bình luận nào</div>
+                    ) : (
+                        data.map((cmt: any) => {
+                            return (
+                                <div className="flex items-start mb-4" key={cmt._id}>
+                                    <div>
+                                        <p className="text-gray-600">{cmt.createdAt}</p>
+                                        <p>{cmt.content}</p>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    )}
+                </div>
             </div>
-
             <h1 className="text-2xl font-bold mb-4">Leave a Comment</h1>
             <Form name="form_item_path" layout="vertical" onFinish={onFinish} autoComplete="off">
                 <Form.Item

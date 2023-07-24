@@ -71,7 +71,7 @@ const Homepage = () => {
                 <div className="relative flex items-center">
                   <Input.Search
                     className="w-full max-w-xs p-2 rounded-full bg-[#5765be] focus:bg-white"
-                    placeholder="Tìm kiếm"
+                    placeholder="search product"
                     onSearch={handleSearch}
                     enterButton={<SearchOutlined />}
                   />
