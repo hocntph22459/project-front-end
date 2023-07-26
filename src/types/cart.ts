@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../redux/contants/cart/cart.type";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../redux/typeActions/cart.type";
 export interface ICartItem {
   _id: string;
   name: string;

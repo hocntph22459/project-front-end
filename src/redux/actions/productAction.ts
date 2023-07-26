@@ -1,5 +1,5 @@
-import { FETCH_PRODUCTS_FAILED, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS } from "../../contants/products/products.type";
-import { IProduct } from "../../../types/product";
+import { FETCH_PRODUCTS_FAILED, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS } from "../typeActions/products.type";
+import { IProduct } from "../../types/product";
 
 
 export const FetchProductsRequest = () => ({

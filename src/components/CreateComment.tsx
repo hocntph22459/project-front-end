@@ -7,7 +7,6 @@ const CreateComment = () => {
     const { id }: string | any = useParams()
     const navigate = useNavigate()
     const { data } = useFetchData('/comments/product/' + id)
-    console.log(data)
     const user = localStorage.getItem("user");
     const userParse = user ? JSON.parse(user) : null;
     const onFinish = async (value: IComment) => {
@@ -30,7 +29,6 @@ const CreateComment = () => {
                     } catch (error: any) {
                         message.error(error.response.data.message, 5);
                     }
-                    console.log(Data)
                 }
             }
         }

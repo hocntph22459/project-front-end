@@ -32,8 +32,6 @@ const ManagementProductUpdate = () => {
   useEffect(() => {
     GetAllHashtag().then(({ data }) => sethashtags(data))
   }, []);
-  console.log(product)
-  const [open, setOpen] = useState(false);
   const [files, setFiles]: any = useState([]);
   const [sizes, setSizes] = useState<Size[]>([{ size: '', quantity: 0 }]);
 
@@ -82,7 +80,6 @@ const ManagementProductUpdate = () => {
           tags: values.tags,
           sizes: sizes,
         }
-        console.log(DataNew)
         const key = 'loading'
         const loading = await message.loading({ content: 'loading!', key, duration: 2 })
         if (loading) {
@@ -95,7 +92,7 @@ const ManagementProductUpdate = () => {
         console.error(error);
       }
     }
-    catch (error:any) {
+    catch (error: any) {
       message.error(error.response.data.message, 5);
     }
   };
@@ -112,7 +109,6 @@ const ManagementProductUpdate = () => {
     CategoryId: product.CategoryId.map(cate => cate.name),
     sizes: product.sizes
   };
-  console.log(initial) //sizes là 1 mảng chứa {size,quantity}
   return (
     <Form
       labelCol={{ span: 4 }}

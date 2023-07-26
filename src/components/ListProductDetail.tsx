@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { createContext, useContext } from 'react';
 import { IProduct, IProductDetail } from '../types/product';
-import { addToCart } from '../redux/actions/cart/cartActions';
+import { addToCart } from '../redux/actions/cartActions';
 import { AppDispatch } from '../redux/store';
 type Props = {
     product: IProductDetail

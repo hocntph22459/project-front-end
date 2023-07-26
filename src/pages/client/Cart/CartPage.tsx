@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart } from '../../../redux/actions/cart/cartActions';
+import { removeFromCart } from '../../../redux/actions/cartActions';
 import EmptyCart from '../../../components/EmptyCart';
 import { Link } from 'react-router-dom';
 import CheckoutCart from '../../../components/CheckoutCart';
@@ -7,7 +7,6 @@ import { AppDispatch, RootState } from '../../../redux/store';
 function CartPage() {
     const dispatch = useDispatch<AppDispatch>();
     const handleRemove = (id: string) => {
-        console.log(id)
         dispatch(removeFromCart(id));
     };
     const cartItems = useSelector((state: RootState) => state.cart.cartItems);

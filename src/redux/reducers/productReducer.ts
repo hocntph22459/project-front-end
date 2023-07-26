@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS_SUCCESS } from "../../contants/products/products.type";
+import { FETCH_PRODUCTS_SUCCESS } from "../typeActions/products.type";
 
   const initialState = {
     products: [],

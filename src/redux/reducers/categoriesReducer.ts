@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES_SUCCESS } from "../../contants/categories/categories.type";
+import { FETCH_CATEGORIES_SUCCESS } from "../typeActions/categories.type";
 
   const initialState = {
     categories: [],

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { IProduct } from '../types/product';
 import { Carousel, FormItemProps, Image, Input, Form, Select, message } from 'antd'
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/actions/cart/cartActions';
+import { addToCart } from '../redux/actions/cartActions';
 import { createContext, useContext } from 'react';
 import { AppDispatch } from '../redux/store';
 type Props = {

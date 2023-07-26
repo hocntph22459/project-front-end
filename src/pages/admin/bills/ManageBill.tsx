@@ -5,14 +5,11 @@ import { Link } from 'react-router-dom';
 import { GetAllBill, RemoveBill } from '../../../services/bill';
 import IBill from '../../../types/bill';
 import ListItemsOrder from '../../../components/ListItemsOrder';
-
 const ManageBill = () => {
-  // api comment 
   const [bills, setbills] = useState<IBill[]>([])
   useEffect(() => {
     GetAllBill().then(({ data }) => setbills(data))
   }, [])
-
   const HandleRemoveBill = async (id: string) => {
     try {
       Modal.confirm({
@@ -125,7 +122,6 @@ const ManageBill = () => {
       status: item.status
     }
   })
-  console.log(listData)
   if (listData.length == 0)
     return (
       <Empty description={false} />

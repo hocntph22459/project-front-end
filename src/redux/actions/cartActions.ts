@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../../contants/cart/cart.type';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../typeActions/cart.type';
 import { Dispatch } from 'redux';
-import { GetOneProduct } from '../../../services/product';
+import { GetOneProduct } from '../../services/product';
 
 export const addToCart = (cartData: any) => async (dispatch: Dispatch, getState: any) => {
   const { data } = await GetOneProduct(cartData.productId);

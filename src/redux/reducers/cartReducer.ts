@@ -1,5 +1,5 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../../contants/cart/cart.type';
-import { ICartState, ICartAction } from '../../../types/cart';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../typeActions/cart.type';
+import { ICartState, ICartAction } from '../../types/cart';
 
 const initialState: ICartState = {
   cartItems: localStorage.getItem('cartItems')

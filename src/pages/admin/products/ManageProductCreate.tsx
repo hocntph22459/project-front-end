@@ -72,7 +72,6 @@ const ManagementProductCreate = () => {
           tags: values.tags,
           sizes: sizes,
         }
-        console.log(DataNew)
         const key = 'loading'
         const loading = await message.loading({ content: 'loading!', key, duration: 2 })
         if (loading) {

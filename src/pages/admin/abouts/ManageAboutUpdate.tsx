@@ -64,7 +64,6 @@ const ManageAboutUpdate = () => {
         formData.append('upload_preset', upload_preset);
         formData.append('cloud_name', cloud_name);
         formData.append('folder', 'project');
-        console.log(file.originFileObj as Blob)
       });
       const res = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/upload`, formData, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -79,15 +78,11 @@ const ManageAboutUpdate = () => {
           message.success('successfully update', 3);
       }
       navigate('/admin/abouts');
-    } catch (error:any) {
+    } catch (error: any) {
       message.error(error.response.data.message, 5);
     }
-    console.log(values)
   };
-
-
   if (!about) return null;
-
   const initial = {
     _id: about._id,
     name: about.name,

@@ -8,7 +8,7 @@ type Props = {
     orders: IBill[];
 };
 
-const ListBill = (props: Props) => {
+const ListOrder = (props: Props) => {
     const navigate = useNavigate()
     const Remove = (id: string) => {
         try {
@@ -104,4 +104,4 @@ const ListBill = (props: Props) => {
     );
 };
 
-export default ListBill;
+export default ListOrder;

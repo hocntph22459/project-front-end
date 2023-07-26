@@ -1,6 +1,6 @@
-import { GetAllCategory } from "../../../services/categories";
-import { ICategory } from "../../../types/category";
-import { FETCH_CATEGORIES_FAILED, FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_SUCCESS } from "../../contants/categories/categories.type";
+import { GetAllCategory } from "../../services/categories";
+import { ICategory } from "../../types/category";
+import { FETCH_CATEGORIES_FAILED, FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_SUCCESS } from "../typeActions/categories.type";
 
 
 export const FetchCategoriesRequest = () => ({
